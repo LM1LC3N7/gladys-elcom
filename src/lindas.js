@@ -71,6 +71,12 @@ SELECT ?operator ?operatorName ?category ?product ?total ?energy ?gridusage ?cha
 } LIMIT ${MAX_ROWS}`;
 }
 
+/** The date ElCom last changed its data (`schema:dateModified` of the cube). */
+export function cubeQuery() {
+  return `${PREFIXES}
+SELECT ?modified WHERE { GRAPH <${ELCOM_GRAPH}> { <${ELCOM_CUBE}> schema:dateModified ?modified } } LIMIT 5`;
+}
+
 /** A search text: 4 digits (a postal code) or 2-60 letters, digits, spaces and - ' . ( ) /. */
 export function searchText(raw) {
   if (typeof raw !== 'string') return null;
@@ -168,6 +174,7 @@ export async function select(
     timeoutMs = REQUEST_TIMEOUT,
     url = LINDAS_URL,
     timers = realTimers,
+    signal,
   },
 ) {
   const controller = new AbortController();
@@ -176,6 +183,10 @@ export async function select(
     timedOut = true;
     controller.abort();
   }, timeoutMs);
+  // The app stopping aborts the request in flight too.
+  const stop = () => controller.abort();
+  if (signal?.aborted) controller.abort();
+  signal?.addEventListener('abort', stop);
   try {
     return await exchange(query, {
       version,
@@ -186,6 +197,7 @@ export async function select(
     });
   } finally {
     timers.clearTimeout(id);
+    signal?.removeEventListener('abort', stop);
   }
 }
 

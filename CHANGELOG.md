@@ -20,3 +20,7 @@ the notes of the version's GitHub Release.
   my contracts".
 - Tariffs read once per municipality and year from LINDAS and kept in `/data`; the next year from 1 September; a
   missing tariff asked again a week later; any failure pauses the requests from 1 min, doubled up to 6 h.
+- Corrections and late publications picked up: the date of the ElCom data asked once a day, a tariff of this
+  year or the next read again when it changed, or once a week when a contract finds nothing in it; the button
+  "Check my contracts" reads them again (once an hour at most).
+- A price of 0 in the ElCom data ("Aucun", "kein Tarif vorhanden") is "no tariff", never a cost of 0.

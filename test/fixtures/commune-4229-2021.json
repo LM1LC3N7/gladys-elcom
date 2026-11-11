@@ -1,0 +1,1597 @@
+{
+  "head": {
+    "vars": [
+      "operator",
+      "operatorName",
+      "category",
+      "product",
+      "total",
+      "energy",
+      "gridusage",
+      "charge",
+      "aidfee",
+      "meteringrate",
+      "energyname",
+      "modified"
+    ]
+  },
+  "results": {
+    "bindings": [
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/229"
+        },
+        "operatorName": {
+          "type": "literal",
+          "value": "Elektrizitäts-Genossenschaft Boswil-Bünzen"
+        },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H1"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "21.937"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "6.299"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.138"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.200"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "https://cube.link/Undefined",
+          "type": "literal",
+          "value": ""
+        },
+        "energyname": { "type": "literal", "value": "KN (E)" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/229"
+        },
+        "operatorName": {
+          "type": "literal",
+          "value": "Elektrizitäts-Genossenschaft Boswil-Bünzen"
+        },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H2"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "19.188"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "6.297"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "10.391"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.200"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "https://cube.link/Undefined",
+          "type": "literal",
+          "value": ""
+        },
+        "energyname": { "type": "literal", "value": "KN (E)" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/229"
+        },
+        "operatorName": {
+          "type": "literal",
+          "value": "Elektrizitäts-Genossenschaft Boswil-Bünzen"
+        },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H3"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "16.464"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "6.276"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "7.688"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.200"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "https://cube.link/Undefined",
+          "type": "literal",
+          "value": ""
+        },
+        "energyname": { "type": "literal", "value": "KN (E)" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/229"
+        },
+        "operatorName": {
+          "type": "literal",
+          "value": "Elektrizitäts-Genossenschaft Boswil-Bünzen"
+        },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H4"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "17.082"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "6.298"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "8.283"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.200"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "https://cube.link/Undefined",
+          "type": "literal",
+          "value": ""
+        },
+        "energyname": { "type": "literal", "value": "KN (E)" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/229"
+        },
+        "operatorName": {
+          "type": "literal",
+          "value": "Elektrizitäts-Genossenschaft Boswil-Bünzen"
+        },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H6"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.786"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "6.259"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "5.028"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.200"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "https://cube.link/Undefined",
+          "type": "literal",
+          "value": ""
+        },
+        "energyname": { "type": "literal", "value": "KN (E)" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/95"
+        },
+        "operatorName": { "type": "literal", "value": "Elektra Genossenschaft Waldhäusern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H7"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "17.943"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "6.214"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "9.430"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "https://cube.link/Undefined",
+          "type": "literal",
+          "value": ""
+        },
+        "energyname": { "type": "literal", "value": "HG 2021" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/229"
+        },
+        "operatorName": {
+          "type": "literal",
+          "value": "Elektrizitäts-Genossenschaft Boswil-Bünzen"
+        },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H7"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "14.982"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "6.286"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "6.196"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.200"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "https://cube.link/Undefined",
+          "type": "literal",
+          "value": ""
+        },
+        "energyname": { "type": "literal", "value": "KN (E)" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/229"
+        },
+        "operatorName": {
+          "type": "literal",
+          "value": "Elektrizitäts-Genossenschaft Boswil-Bünzen"
+        },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/C1"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "16.704"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "6.327"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "7.877"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.200"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "https://cube.link/Undefined",
+          "type": "literal",
+          "value": ""
+        },
+        "energyname": { "type": "literal", "value": "KN (E)" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/229"
+        },
+        "operatorName": {
+          "type": "literal",
+          "value": "Elektrizitäts-Genossenschaft Boswil-Bünzen"
+        },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H8"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "16.015"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "6.298"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "7.217"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.200"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "https://cube.link/Undefined",
+          "type": "literal",
+          "value": ""
+        },
+        "energyname": { "type": "literal", "value": "KN (E)" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/229"
+        },
+        "operatorName": {
+          "type": "literal",
+          "value": "Elektrizitäts-Genossenschaft Boswil-Bünzen"
+        },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/C2"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "15.557"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "6.325"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "6.732"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.200"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "https://cube.link/Undefined",
+          "type": "literal",
+          "value": ""
+        },
+        "energyname": { "type": "literal", "value": "KN (E)" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/229"
+        },
+        "operatorName": {
+          "type": "literal",
+          "value": "Elektrizitäts-Genossenschaft Boswil-Bünzen"
+        },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/C3"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "14.996"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "6.077"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "6.419"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.200"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "https://cube.link/Undefined",
+          "type": "literal",
+          "value": ""
+        },
+        "energyname": { "type": "literal", "value": "GN (E)" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/229"
+        },
+        "operatorName": {
+          "type": "literal",
+          "value": "Elektrizitäts-Genossenschaft Boswil-Bünzen"
+        },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/C5"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "12.123"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "5.800"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "3.823"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.200"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "https://cube.link/Undefined",
+          "type": "literal",
+          "value": ""
+        },
+        "energyname": { "type": "literal", "value": "GH (E)" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/229"
+        },
+        "operatorName": {
+          "type": "literal",
+          "value": "Elektrizitäts-Genossenschaft Boswil-Bünzen"
+        },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/C6"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "11.778"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "5.800"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "3.478"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.200"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "https://cube.link/Undefined",
+          "type": "literal",
+          "value": ""
+        },
+        "energyname": { "type": "literal", "value": "GH (E)" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/229"
+        },
+        "operatorName": {
+          "type": "literal",
+          "value": "Elektrizitäts-Genossenschaft Boswil-Bünzen"
+        },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/C7"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "11.303"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "5.800"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "3.003"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.200"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "https://cube.link/Undefined",
+          "type": "literal",
+          "value": ""
+        },
+        "energyname": { "type": "literal", "value": "GH (E)" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/229"
+        },
+        "operatorName": {
+          "type": "literal",
+          "value": "Elektrizitäts-Genossenschaft Boswil-Bünzen"
+        },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H5"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "15.481"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "6.279"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "6.702"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.200"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "https://cube.link/Undefined",
+          "type": "literal",
+          "value": ""
+        },
+        "energyname": { "type": "literal", "value": "KN (E)" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/229"
+        },
+        "operatorName": {
+          "type": "literal",
+          "value": "Elektrizitäts-Genossenschaft Boswil-Bünzen"
+        },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/C4"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "14.454"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "6.065"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "5.889"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.200"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "https://cube.link/Undefined",
+          "type": "literal",
+          "value": ""
+        },
+        "energyname": { "type": "literal", "value": "GN (E)" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/95"
+        },
+        "operatorName": { "type": "literal", "value": "Elektra Genossenschaft Waldhäusern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/C1"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "meteringrate": {
+          "datatype": "https://cube.link/Undefined",
+          "type": "literal",
+          "value": ""
+        },
+        "energyname": { "type": "literal", "value": "KEIN NAME" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/95"
+        },
+        "operatorName": { "type": "literal", "value": "Elektra Genossenschaft Waldhäusern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H8"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "meteringrate": {
+          "datatype": "https://cube.link/Undefined",
+          "type": "literal",
+          "value": ""
+        },
+        "energyname": { "type": "literal", "value": "KEIN NAME" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/95"
+        },
+        "operatorName": { "type": "literal", "value": "Elektra Genossenschaft Waldhäusern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/C3"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "meteringrate": {
+          "datatype": "https://cube.link/Undefined",
+          "type": "literal",
+          "value": ""
+        },
+        "energyname": { "type": "literal", "value": "KEIN NAME" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/95"
+        },
+        "operatorName": { "type": "literal", "value": "Elektra Genossenschaft Waldhäusern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/C4"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "meteringrate": {
+          "datatype": "https://cube.link/Undefined",
+          "type": "literal",
+          "value": ""
+        },
+        "energyname": { "type": "literal", "value": "KEIN NAME" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/95"
+        },
+        "operatorName": { "type": "literal", "value": "Elektra Genossenschaft Waldhäusern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/C5"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "meteringrate": {
+          "datatype": "https://cube.link/Undefined",
+          "type": "literal",
+          "value": ""
+        },
+        "energyname": { "type": "literal", "value": "KEIN NAME" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/95"
+        },
+        "operatorName": { "type": "literal", "value": "Elektra Genossenschaft Waldhäusern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/C6"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "meteringrate": {
+          "datatype": "https://cube.link/Undefined",
+          "type": "literal",
+          "value": ""
+        },
+        "energyname": { "type": "literal", "value": "KEIN NAME" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/95"
+        },
+        "operatorName": { "type": "literal", "value": "Elektra Genossenschaft Waldhäusern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/C7"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "meteringrate": {
+          "datatype": "https://cube.link/Undefined",
+          "type": "literal",
+          "value": ""
+        },
+        "energyname": { "type": "literal", "value": "KEIN NAME" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/95"
+        },
+        "operatorName": { "type": "literal", "value": "Elektra Genossenschaft Waldhäusern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H1"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "meteringrate": {
+          "datatype": "https://cube.link/Undefined",
+          "type": "literal",
+          "value": ""
+        },
+        "energyname": { "type": "literal", "value": "KEIN NAME" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/95"
+        },
+        "operatorName": { "type": "literal", "value": "Elektra Genossenschaft Waldhäusern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H2"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "meteringrate": {
+          "datatype": "https://cube.link/Undefined",
+          "type": "literal",
+          "value": ""
+        },
+        "energyname": { "type": "literal", "value": "KEIN NAME" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/95"
+        },
+        "operatorName": { "type": "literal", "value": "Elektra Genossenschaft Waldhäusern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H3"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "meteringrate": {
+          "datatype": "https://cube.link/Undefined",
+          "type": "literal",
+          "value": ""
+        },
+        "energyname": { "type": "literal", "value": "KEIN NAME" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/95"
+        },
+        "operatorName": { "type": "literal", "value": "Elektra Genossenschaft Waldhäusern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H4"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "meteringrate": {
+          "datatype": "https://cube.link/Undefined",
+          "type": "literal",
+          "value": ""
+        },
+        "energyname": { "type": "literal", "value": "KEIN NAME" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/95"
+        },
+        "operatorName": { "type": "literal", "value": "Elektra Genossenschaft Waldhäusern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H5"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "meteringrate": {
+          "datatype": "https://cube.link/Undefined",
+          "type": "literal",
+          "value": ""
+        },
+        "energyname": { "type": "literal", "value": "KEIN NAME" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/95"
+        },
+        "operatorName": { "type": "literal", "value": "Elektra Genossenschaft Waldhäusern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H6"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "meteringrate": {
+          "datatype": "https://cube.link/Undefined",
+          "type": "literal",
+          "value": ""
+        },
+        "energyname": { "type": "literal", "value": "KEIN NAME" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/95"
+        },
+        "operatorName": { "type": "literal", "value": "Elektra Genossenschaft Waldhäusern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/C2"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "meteringrate": {
+          "datatype": "https://cube.link/Undefined",
+          "type": "literal",
+          "value": ""
+        },
+        "energyname": { "type": "literal", "value": "KEIN NAME" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      }
+    ]
+  }
+}

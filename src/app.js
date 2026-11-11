@@ -24,6 +24,10 @@
 
 import {
   ACTION_BUDGET,
+  BUTTON_REREAD,
+  CUBE_CHECK,
+  PROBLEM_REREAD,
+  REREAD_MIN,
   CATEGORIES,
   CONTRACTS_RETRY_MAX,
   CONTRACTS_RETRY_MIN,
@@ -48,10 +52,11 @@ import {
   TEMPLATE_KEY,
 } from './constants.js';
 import { TEXTS, join, priceText, problemText, reasonText } from './i18n.js';
-import { searchQuery, searchText, select, tariffQuery } from './lindas.js';
+import { cubeQuery, searchQuery, searchText, select, tariffQuery } from './lindas.js';
 import { createFileStore } from './store.js';
 import {
   InputError,
+  MAX_RAPPEN,
   cleanText,
   intervalCosts,
   parseInputs,
@@ -98,8 +103,8 @@ function validRow(r) {
     CATEGORIES.includes(r.category) &&
     PRODUCTS.includes(r.product) &&
     finite(r.total) &&
-    r.total >= 0 &&
-    r.total <= 1000 &&
+    r.total > 0 &&
+    r.total <= MAX_RAPPEN &&
     ['energy', 'grid', 'charges', 'aid_fee', 'metering'].every((k) => isPart(r[k])) &&
     isName(r.name, 48)
   );
@@ -160,15 +165,29 @@ export class ElcomApp {
     this.monotonic = monotonic;
     this.timers = timers;
     this.store = store;
+    /** Aborted by stop(): the request in flight ends with it. */
+    this.abort = new AbortController();
     this.selectImpl = (query) =>
-      select(query, { version, fetchImpl, timeoutMs: requestTimeout, timers: this.timers });
+      select(query, {
+        version,
+        fetchImpl,
+        timeoutMs: requestTimeout,
+        timers: this.timers,
+        signal: this.abort.signal,
+      });
 
     /** By `municipality:year`: the tariffs fetched. */
     this.entries = new Map();
-    /** By `municipality:year`: no tariff then, `{ at (wall), due (monotonic) }`. */
+    /**
+     * By `municipality:year`: no tariff then (`kind` 'missing') or an answer
+     * none of whose rows could be read ('unreadable'): `{ at (wall), due (monotonic), kind }`.
+     */
     this.misses = new Map();
     /** The pause of every request: `{ until (wall), due (monotonic), code }`. */
     this.pause = null;
+    /** The date ElCom last changed its data: `{ modified, at (wall), due (monotonic) }`. */
+    this.cube = { modified: null, at: undefined, due: undefined };
+    this.pauseTimer = undefined;
     /** Failures in a row (the pause doubles); 0 after a success. */
     this.failures = 0;
     /** Monotonic time of the last request sent. */
@@ -184,6 +203,8 @@ export class ElcomApp {
     this.storeState = 'pending';
     this.loading = undefined;
     this.storeTimer = undefined;
+    /** A read of /data running: never two at once. */
+    this.storeReading = false;
 
     /** The contracts of the template, by id: `{ id, inputs }`. */
     this.contracts = new Map();
@@ -191,6 +212,8 @@ export class ElcomApp {
     this.contractsFailures = 0;
 
     this.closed = false;
+    /** Connected and started: the status may be published. */
+    this.started = false;
     this.generation = 0;
     this.refreshTimer = undefined;
     this.lastStatus = undefined;
@@ -203,6 +226,8 @@ export class ElcomApp {
   /** Connected to Gladys: read the contracts and fetch what they need, then once a day. */
   start() {
     this.closed = false;
+    this.started = true;
+    if (this.abort.signal.aborted) this.abort = new AbortController();
     this.generation += 1;
     this.lastStatus = undefined;
     this.clearRefresh();
@@ -213,6 +238,7 @@ export class ElcomApp {
 
   /** Disconnected: the daily refresh stops until the next connection. */
   disconnected() {
+    this.started = false;
     this.generation += 1;
     this.clearRefresh();
   }
@@ -220,8 +246,14 @@ export class ElcomApp {
   /** Shutdown: no timer nor request after this; /data written. */
   async stop() {
     this.closed = true;
+    this.started = false;
     this.generation += 1;
     this.clearRefresh();
+    this.abort.abort();
+    if (this.pauseTimer !== undefined) {
+      this.timers.clearTimeout(this.pauseTimer);
+      this.pauseTimer = undefined;
+    }
     if (this.storeTimer !== undefined) {
       this.timers.clearTimeout(this.storeTimer);
       this.storeTimer = undefined;
@@ -257,10 +289,16 @@ export class ElcomApp {
       const late = new Promise((resolve) => {
         timer = this.timers.setTimeout(() => resolve('late'), STORE_LOAD_TIMEOUT);
       });
-      const read = this.store.load().then(
-        (data) => ({ data }),
-        (err) => ({ err }),
-      );
+      this.storeReading = true;
+      const read = this.store
+        .load()
+        .then(
+          (data) => ({ data }),
+          (err) => ({ err }),
+        )
+        .finally(() => {
+          this.storeReading = false;
+        });
       const result = await Promise.race([read, late]);
       this.timers.clearTimeout(timer);
       if (result === 'late' || result.err) {
@@ -285,13 +323,23 @@ export class ElcomApp {
   retryStore() {
     if (this.closed || this.storeTimer !== undefined) return;
     this.storeTimer = this.timers.setTimeout(async () => {
+      if (this.storeReading) {
+        // The read before is still running: one at a time.
+        this.storeTimer = undefined;
+        this.retryStore();
+        return;
+      }
       let data;
+      this.storeReading = true;
       try {
         data = await this.store.load();
       } catch (err) {
         this.logger.debug(`/data still unreadable: ${err.message}`);
+      } finally {
+        this.storeReading = false;
       }
       this.storeTimer = undefined;
+      if (this.closed) return;
       if (data && this.storeState === 'broken') {
         this.restore(data);
       } else if (this.storeState === 'broken') {
@@ -307,17 +355,35 @@ export class ElcomApp {
     for (const raw of Array.isArray(data.entries) ? data.entries.slice(0, MAX_ENTRIES) : []) {
       const entry = validEntry(raw, at);
       if (entry && !this.entries.has(keyOf(entry.municipality, entry.year))) {
+        entry.readAt = mono - Math.min(at - entry.fetchedAt, 400 * MISS_RETRY);
         this.entries.set(keyOf(entry.municipality, entry.year), entry);
       }
     }
     const misses = data.misses && typeof data.misses === 'object' ? data.misses : {};
-    for (const [key, when] of Object.entries(misses).slice(0, MAX_MISSES)) {
+    for (const [key, value] of Object.entries(misses).slice(0, MAX_MISSES)) {
+      const when = finite(value) ? value : value?.at;
+      const kind = value?.kind === 'unreadable' ? 'unreadable' : 'missing';
       if (!/^\d{1,4}:\d{4}$/.test(key) || !finite(when)) continue;
       const asked = Math.min(when, at);
       const rest = Math.min(MISS_RETRY, asked + MISS_RETRY - at);
       if (rest <= 0) continue;
       const known = this.misses.get(key);
-      if (!known || known.at < asked) this.misses.set(key, { at: asked, due: mono + rest });
+      if (!known || known.at < asked) this.misses.set(key, { at: asked, due: mono + rest, kind });
+    }
+    const cube = data.cube;
+    if (
+      cube &&
+      typeof cube.modified === 'string' &&
+      /^\d{4}-\d{2}-\d{2}$/.test(cube.modified) &&
+      finite(cube.at) &&
+      !(this.cube.modified && this.cube.modified > cube.modified)
+    ) {
+      const asked = Math.min(cube.at, at);
+      this.cube = {
+        modified: cube.modified,
+        at: asked,
+        due: mono + Math.max(0, Math.min(CUBE_CHECK, asked + CUBE_CHECK - at)),
+      };
     }
     const pause = data.pause;
     if (pause && finite(pause.until)) {
@@ -364,7 +430,10 @@ export class ElcomApp {
         rows: e.rows,
         fetchedAt: e.fetchedAt,
       })),
-      misses: Object.fromEntries([...this.misses].map(([key, m]) => [key, m.at])),
+      misses: Object.fromEntries(
+        [...this.misses].map(([key, m]) => [key, { at: m.at, kind: m.kind }]),
+      ),
+      cube: this.cube.modified ? { modified: this.cube.modified, at: this.cube.at } : null,
       pause:
         this.pause && this.pause.due > mono
           ? { until: this.pause.until, code: this.pause.code }
@@ -398,6 +467,13 @@ export class ElcomApp {
     this.logger.warn(
       `LINDAS: ${err?.message ?? err}; requests paused for ${Math.round(ms / 1000)} s`,
     );
+    // The status follows the pause: said when it starts, cleared when it ends.
+    if (this.pauseTimer !== undefined) this.timers.clearTimeout(this.pauseTimer);
+    this.pauseTimer = this.timers.setTimeout(() => {
+      this.pauseTimer = undefined;
+      this.publishStatus().catch(() => {});
+    }, ms + 1);
+    this.publishStatus().catch(() => {});
   }
 
   sleep(ms) {
@@ -434,10 +510,14 @@ export class ElcomApp {
     }
     try {
       const bindings = await this.selectImpl(query);
+      const wasPaused = this.pause !== null;
       this.failures = 0;
       this.pause = null;
+      if (wasPaused) this.publishStatus().catch(() => {});
       return bindings;
     } catch (err) {
+      // Stopped: the request was aborted on purpose, not a failure of LINDAS.
+      if (this.closed) throw new Unavailable('stopped');
       this.startPause(err);
       this.persist();
       throw new Unavailable('paused', this.pause.until);
@@ -450,7 +530,7 @@ export class ElcomApp {
     if (year < FIRST_YEAR || year > today.year + 1) return { code: 'out_of_range' };
     if (year === today.year + 1 && today.month < NEXT_YEAR_FROM_MONTH) return { code: 'not_yet' };
     const miss = this.misses.get(keyOf(municipality, year));
-    if (miss && miss.due > mono) return { code: 'missing', until: this.now() + (miss.due - mono) };
+    if (miss && miss.due > mono) return { code: miss.kind, until: this.now() + (miss.due - mono) };
     const paused = this.pausedAt(mono);
     if (paused) return { code: 'paused', until: paused.until };
     return null;
@@ -514,29 +594,108 @@ export class ElcomApp {
     }
     const entry = parseTariffRows(bindings, municipality, year);
     const at = this.now();
+    const mono = this.monotonic();
+    const known = this.entries.get(key);
     if (entry.rows.length === 0) {
-      if (bindings.length > 0) {
-        // Rows, none readable: the format changed. Never "no tariff".
-        this.startPause({ code: 'unreadable', message: 'unreadable rows' });
+      // Rows, none readable (the format changed): never "no tariff", and only
+      // this municipality and year wait, not the others.
+      const kind = entry.bad > 0 && entry.empty === 0 ? 'unreadable' : 'missing';
+      if (known) {
+        // Read again and found nothing usable: what was read before is kept.
+        known.fetchedAt = at;
+        known.readAt = mono;
         this.persist();
-        return { reason: { code: 'paused', until: this.pause.until } };
+        this.logger.warn(
+          `ElCom tariffs ${year} of municipality ${municipality}: read again, ${kind}: kept`,
+        );
+        return { entry: known };
       }
-      this.misses.set(key, { at, due: this.monotonic() + MISS_RETRY });
+      this.misses.set(key, { at, due: mono + MISS_RETRY, kind });
       this.trim();
       this.persist();
-      this.logger.info(`No ElCom tariff for municipality ${municipality} in ${year}`);
-      return { reason: { code: 'missing', until: at + MISS_RETRY } };
+      this.logger.info(`No ElCom tariff for municipality ${municipality} in ${year} (${kind})`);
+      return { reason: { code: kind, until: at + MISS_RETRY } };
     }
-    entry.fetchedAt = at;
-    entry.usedAt = at;
-    this.entries.set(key, entry);
+    const fresh = {
+      municipality,
+      year,
+      modified: entry.modified,
+      operators: entry.operators,
+      rows: entry.rows,
+      fetchedAt: at,
+      usedAt: known?.usedAt ?? at,
+      readAt: mono,
+    };
+    const changed = known && JSON.stringify(known.rows) !== JSON.stringify(fresh.rows);
+    this.entries.set(key, fresh);
     this.misses.delete(key);
     this.trim();
     this.persist();
     this.logger.info(
-      `ElCom tariffs ${year} of municipality ${municipality}: ${entry.rows.length} rows, data of ${entry.modified ?? '?'}`,
+      `ElCom tariffs ${year} of municipality ${municipality}: ${fresh.rows.length} rows, data of ${fresh.modified ?? '?'}${known ? (changed ? ', changed' : ', unchanged') : ''}`,
     );
-    return { entry };
+    return { entry: fresh };
+  }
+
+  /**
+   * Read a tariff already kept again, when it was read at least `minAge` ms
+   * ago (and never sooner than the pause, nor out of the years allowed).
+   */
+  async reread(municipality, year, minAge, budget = Infinity) {
+    const key = keyOf(municipality, year);
+    const entry = this.entries.get(key);
+    if (!entry || this.storeState !== 'ok') return;
+    const mono = this.monotonic();
+    if (mono - entry.readAt < minAge) return;
+    const today = zurichDate(this.now());
+    if (year < today.year - 1 || this.blocked(municipality, year, mono)) return;
+    let job = this.inflight.get(key);
+    if (!job) {
+      job = this.fetchTariffs(municipality, year).finally(() => this.inflight.delete(key));
+      this.inflight.set(key, job);
+    }
+    await this.within(job, budget, undefined);
+  }
+
+  /** The date ElCom last changed its data, asked once a day at most. */
+  async checkCube() {
+    const mono = this.monotonic();
+    if (this.storeState !== 'ok' || (this.cube.due !== undefined && this.cube.due > mono)) return;
+    if (this.pausedAt(mono)) return;
+    let bindings;
+    try {
+      bindings = await this.request(cubeQuery());
+    } catch (err) {
+      if (err instanceof Unavailable) return;
+      throw err;
+    }
+    const dates = bindings
+      .map((b) => cleanText(b?.modified, 32))
+      .filter((d) => d && /^\d{4}-\d{2}-\d{2}/.test(d))
+      .map((d) => d.slice(0, 10))
+      .sort();
+    this.cube = {
+      modified: dates.at(-1) ?? this.cube.modified,
+      at: this.now(),
+      due: this.monotonic() + CUBE_CHECK,
+    };
+    this.persist();
+  }
+
+  /** A tariff of this year or the next read before ElCom last changed its data. */
+  outdated(entry) {
+    const today = zurichDate(this.now());
+    return (
+      entry.year >= today.year &&
+      Boolean(this.cube.modified) &&
+      (entry.modified === null || this.cube.modified > entry.modified)
+    );
+  }
+
+  /** The years a contract needs now: this one, and the next from September. */
+  yearsNow() {
+    const today = zurichDate(this.now());
+    return today.month >= NEXT_YEAR_FROM_MONTH ? [today.year, today.year + 1] : [today.year];
   }
 
   // --- Contracts ---------------------------------------------------------------------------
@@ -572,32 +731,45 @@ export class ElcomApp {
         .slice(0, 50)
         .map((c) => [String(c.id), { id: String(c.id).slice(0, 40), inputs: c.inputs }]),
     );
-    const today = zurichDate(this.now());
-    const wanted = new Map();
-    for (const contract of this.contracts.values()) {
-      let inputs;
+    // /data not read (or unreadable): what it keeps is unknown, so nothing is
+    // read here; only the pricing the core asks for may read LINDAS.
+    await this.loadStore();
+    if (generation !== this.generation || this.closed) return;
+    if (this.storeState === 'ok' && this.contracts.size > 0) {
       try {
-        inputs = parseInputs(contract.inputs);
-      } catch {
-        continue;
-      }
-      wanted.set(keyOf(inputs.municipality, today.year), [inputs.municipality, today.year]);
-      if (today.month >= NEXT_YEAR_FROM_MONTH) {
-        wanted.set(keyOf(inputs.municipality, today.year + 1), [
-          inputs.municipality,
-          today.year + 1,
-        ]);
-      }
-    }
-    for (const [municipality, year] of wanted.values()) {
-      if (generation !== this.generation || this.closed) return;
-      try {
-        await this.ensure(municipality, year);
+        await this.checkCube();
       } catch (err) {
-        // One municipality never stops the others nor the daily refresh.
-        this.logger.warn(
-          `Tariffs ${year} of municipality ${municipality} not read: ${err?.message ?? err}`,
-        );
+        this.logger.warn(`ElCom data date not read: ${err?.message ?? err}`);
+      }
+      const done = new Set();
+      for (const contract of this.contracts.values()) {
+        let inputs;
+        try {
+          inputs = parseInputs(contract.inputs);
+        } catch {
+          continue;
+        }
+        for (const year of this.yearsNow()) {
+          if (generation !== this.generation || this.closed) return;
+          try {
+            const key = keyOf(inputs.municipality, year);
+            const { entry } = await this.ensure(inputs.municipality, year);
+            if (!entry || done.has(key)) continue;
+            done.add(key);
+            // Read again when ElCom changed its data, or (once a week) when the
+            // contract finds no tariff in it: a partial publication completed later.
+            if (this.outdated(entry)) {
+              await this.reread(inputs.municipality, year, REREAD_MIN);
+            } else if (pickRow(entry, inputs).problem) {
+              await this.reread(inputs.municipality, year, PROBLEM_REREAD);
+            }
+          } catch (err) {
+            // One municipality never stops the others nor the daily refresh.
+            this.logger.warn(
+              `Tariffs ${year} of municipality ${inputs.municipality} not read: ${err?.message ?? err}`,
+            );
+          }
+        }
       }
     }
     if (generation !== this.generation) return;
@@ -611,7 +783,7 @@ export class ElcomApp {
     try {
       inputs = parseInputs(contract.inputs);
     } catch (err) {
-      return { en: err.message, fr: err.message };
+      return err.texts ?? { en: err.message, fr: err.message };
     }
     const key = keyOf(inputs.municipality, year);
     const entry = this.entries.get(key);
@@ -625,19 +797,27 @@ export class ElcomApp {
     return priceText({ inputs, year, operator: pick.operator, price, modified: entry.modified });
   }
 
+  /** This year, and from September the next one: `{ en, fr }`. */
+  describeNow(contract) {
+    return join(
+      this.yearsNow().map((year) => this.describe(contract, year)),
+      ' | ',
+    );
+  }
+
   async publishStatus() {
-    if (this.closed) return;
+    if (this.closed || !this.started) return;
     const year = zurichYear(this.now());
     const mono = this.monotonic();
     const paused = this.pausedAt(mono);
     const parts = [];
     if (paused) parts.push(reasonText({ code: 'paused', until: paused.until }, { year }));
+    if (this.storeState === 'broken') parts.push(TEXTS.storeBroken);
     if (this.contractsUnread) parts.push(TEXTS.contractsUnread);
     const contracts = [...this.contracts.values()];
     if (contracts.length === 0 && !this.contractsUnread) parts.push(TEXTS.noContract);
     for (const [i, contract] of contracts.slice(0, 3).entries()) {
-      const text = this.describe(contract, year);
-      parts.push(join([TEXTS.contract(i + 1), text], ''));
+      parts.push(join([TEXTS.contract(i + 1), this.describeNow(contract)], ''));
     }
     if (contracts.length > 3) parts.push(TEXTS.more(contracts.length - 3));
     const message = join(parts, ' · ');
@@ -754,16 +934,29 @@ export class ElcomApp {
     this.contractsUnread = false;
     if (contracts.length === 0) return TEXTS.noContract;
     const started = this.monotonic();
-    const year = zurichYear(this.now());
+    const left = () => ACTION_BUDGET - (this.monotonic() - started);
     const parts = [];
+    if (this.storeState === 'pending') await this.within(this.loadStore(), left(), undefined);
+    if (this.storeState !== 'ok') parts.push(TEXTS.storeBroken);
     for (const [i, contract] of contracts.slice(0, 10).entries()) {
       try {
         const inputs = parseInputs(contract.inputs);
-        await this.ensure(inputs.municipality, year, ACTION_BUDGET - (this.monotonic() - started));
+        for (const year of this.yearsNow()) {
+          if (this.storeState !== 'ok') break;
+          // The recourse of the user: read again what was read (or found
+          // missing) more than an hour ago, under the pause and the gap.
+          const key = keyOf(inputs.municipality, year);
+          const miss = this.misses.get(key);
+          if (miss && this.monotonic() - (miss.due - MISS_RETRY) >= BUTTON_REREAD) {
+            this.misses.delete(key);
+          }
+          const result = await this.ensure(inputs.municipality, year, left());
+          if (result.entry) await this.reread(inputs.municipality, year, BUTTON_REREAD, left());
+        }
       } catch {
         // Described below.
       }
-      parts.push(join([TEXTS.contract(i + 1), this.describe(contract, year)], ''));
+      parts.push(join([TEXTS.contract(i + 1), this.describeNow(contract)], ''));
     }
     await this.publishStatus();
     return join(parts, '\n');
@@ -779,6 +972,7 @@ export class ElcomApp {
     if (cached && mono - cached.at < SEARCH_CACHE) return cached.result;
     if (this.storeState === 'pending')
       await this.within(this.loadStore(), STORE_LOAD_TIMEOUT, undefined);
+    if (this.storeState !== 'ok') throw new Error(TEXTS.storeBroken.en);
     const year = zurichYear(this.now());
     let bindings;
     try {
@@ -795,8 +989,7 @@ export class ElcomApp {
       }
       throw err;
     }
-    if (bindings === 'late')
-      throw new Error(reasonText({ code: 'timeout' }, { year, municipality: '' }).en);
+    if (bindings === 'late') throw new Error(TEXTS.searchLate.en);
     const found = new Map();
     for (const b of bindings) {
       const iri = b?.m?.type === 'uri' ? b.m.value : '';

@@ -15,8 +15,14 @@ Pour chaque commune, gestionnaire de réseau, année et profil de consommation, 
 d'un kWh** (ct./kWh, hors TVA) pour un produit standard et pour le produit le moins cher du gestionnaire. Elle ne
 publie **ni distinction heures pleines / heures creuses (HT/NT) ni plages horaires** : un double tarif n'apparaît
 que par sa moyenne sur le profil. L'intégration tarifie donc chaque kWh d'une année civile (heure de Zurich) à
-cette moyenne. Les frais annuels (comptage, taxes de base) sont déjà répartis sur le kWh par l'ElCom ; rien n'est
-ajouté.
+cette moyenne. Les frais annuels (comptage, taxes de base) sont déjà répartis par l'ElCom sur le volume annuel du profil (Berne,
+H4 2026 : comptage 93,60 CHF / 4 500 kWh = 2,08 ct./kWh) ; rien n'est ajouté. Un foyer loin du volume de son profil
+est donc tarifé moins exactement : choisissez le profil le plus proche de votre consommation annuelle.
+
+Le produit `cheapest` n'est publié que depuis 2018, et par une partie des gestionnaires (environ un tiers des lignes
+en 2026 ; aucune à Lausanne) : quand il manque, le contrat le dit et demande `standard`. L'ElCom écrit un prix de 0
+(« Aucun », « kein Tarif vorhanden ») quand un gestionnaire n'a pas de tarif pour un profil : l'intégration le lit
+comme « pas de tarif » et le dit, jamais comme un prix de 0.
 
 Les profils de consommation (catégories ElCom) :
 
@@ -53,20 +59,29 @@ profil ou un produit absent chez le gestionnaire, une commune sans tarif ElCom).
 
 ## Fréquence de lecture
 
-L'ElCom publie les tarifs une fois par an (l'année suivante début septembre). L'intégration garde ce qu'elle a lu
-dans son volume `/data` et :
+L'ElCom publie les tarifs une fois par an (l'année suivante début septembre) et les corrige de temps en temps.
+L'intégration garde ce qu'elle a lu dans son volume `/data` et :
 
-- lit les tarifs d'une commune pour une année **une fois** et les garde (40 couples commune-année au plus, le
-  moins récemment utilisé retiré d'abord) ;
+- lit les tarifs d'une commune pour une année une fois et les garde (40 couples commune-année au plus, le moins
+  récemment utilisé retiré d'abord) ;
 - ne demande l'année suivante qu'à partir du 1er septembre ;
-- quand l'ElCom n'a pas de tarif pour une commune et une année, redemande une semaine plus tard au plus tôt ;
+- demande une fois par jour la date de dernière modification des données ElCom : quand elle est plus récente qu'un
+  tarif de l'année ou de la suivante en usage, ce tarif est relu (une fois par modification) ;
+- relit, une fois par semaine au plus, un tarif de l'année ou de la suivante où un contrat ne trouve rien (un
+  gestionnaire, un profil ou un produit pas encore publié) ;
+- quand l'ElCom n'a pas de tarif pour une commune et une année, ou que sa réponse est illisible, redemande une
+  semaine plus tard au plus tôt ;
+- le bouton **Vérifier mes contrats** relit les tarifs des contrats (l'année, et la suivante dès septembre) lus il
+  y a plus d'une heure, y compris un tarif manquant ;
 - envoie une requête à la fois, à deux secondes d'écart au moins, avec son propre User-Agent ;
-- après un échec (pas de réponse, délai dépassé, limite de débit, erreur du serveur, réponse illisible), suspend
-  toutes les requêtes 1 minute, doublée à chaque nouvel échec jusqu'à 6 heures (un `Retry-After` du serveur est
-  respecté, dans la limite de 6 heures) ;
-- garde ces dates à travers un redémarrage.
+- après un échec (pas de réponse, délai dépassé, limite de débit, erreur du serveur), suspend toutes les requêtes
+  1 minute, doublée à chaque nouvel échec jusqu'à 6 heures (un `Retry-After` du serveur est respecté, dans la
+  limite de 6 heures) ;
+- garde ces dates à travers un redémarrage ; tant que `/data` est illisible, ne demande que les prix dont Gladys a
+  besoin.
 
-Une correction faite par l'ElCom après la lecture d'une année n'est donc pas reprise.
+Les demi-heures déjà tarifées par Gladys ne sont pas retarifées après une correction : seules les suivantes en
+profitent.
 
 ## Tarification et Gladys
 

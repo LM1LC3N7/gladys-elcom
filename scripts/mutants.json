@@ -92,14 +92,8 @@
   {
     "name": "the same tariff fetched twice at once",
     "file": "src/app.js",
-    "from": "let job = this.inflight.get(key);",
-    "to": "let job;"
-  },
-  {
-    "name": "unreadable rows taken for no tariff",
-    "file": "src/app.js",
-    "from": "if (bindings.length > 0) {",
-    "to": "if (false) {"
+    "from": "let job = this.inflight.get(key);\n    if (!job) {\n      job = this.fetchTariffs(municipality, year).finally(() => this.inflight.delete(key));\n      this.inflight.set(key, job);\n    }\n    const left",
+    "to": "let job;\n    if (!job) {\n      job = this.fetchTariffs(municipality, year).finally(() => this.inflight.delete(key));\n      this.inflight.set(key, job);\n    }\n    const left"
   },
   {
     "name": "an unreadable /data written over",
@@ -116,8 +110,8 @@
   {
     "name": "a request after stop",
     "file": "src/app.js",
-    "from": "if (this.closed) throw new Unavailable('stopped');",
-    "to": ""
+    "from": "      if (this.closed) throw new Unavailable('stopped');\n      const mono",
+    "to": "      const mono"
   },
   {
     "name": "the pricing waits past its budget",
@@ -186,12 +180,6 @@
     "to": "true"
   },
   {
-    "name": "a price above 10 CHF/kWh kept",
-    "file": "src/tariffs.js",
-    "from": "n >= 0 && n <= 1000 ?",
-    "to": "n >= 0 ?"
-  },
-  {
     "name": "an answer not cut past its size",
     "file": "src/lindas.js",
     "from": "    if (size > max) {",
@@ -202,5 +190,221 @@
     "file": "src/lindas.js",
     "from": "    controller.abort();",
     "to": ""
+  },
+  {
+    "name": "a total of 0 taken as a price",
+    "file": "src/tariffs.js",
+    "from": "n !== null && n > 0 && n <= MAX_RAPPEN",
+    "to": "n !== null && n >= 0 && n <= MAX_RAPPEN"
+  },
+  {
+    "name": "a no-tariff row kept as a row",
+    "file": "src/tariffs.js",
+    "from": "      if (value !== null && value <= 0) {",
+    "to": "      if (false) {"
+  },
+  {
+    "name": "a price above 10 CHF/kWh VAT included kept",
+    "file": "src/tariffs.js",
+    "from": "export const MAX_RAPPEN = 925;",
+    "to": "export const MAX_RAPPEN = 1000;"
+  },
+  {
+    "name": "unreadable rows taken for no tariff",
+    "file": "src/app.js",
+    "from": "const kind = entry.bad > 0 && entry.empty === 0 ? 'unreadable' : 'missing';",
+    "to": "const kind = 'missing';"
+  },
+  {
+    "name": "a changed cube date never reads again",
+    "file": "src/app.js",
+    "from": "(entry.modified === null || this.cube.modified > entry.modified)",
+    "to": "false"
+  },
+  {
+    "name": "a problem never read again",
+    "file": "src/app.js",
+    "from": "await this.reread(inputs.municipality, year, PROBLEM_REREAD);",
+    "to": ""
+  },
+  {
+    "name": "a read again sooner than its age",
+    "file": "src/app.js",
+    "from": "if (mono - entry.readAt < minAge) return;",
+    "to": ""
+  },
+  {
+    "name": "the cube date asked at every refresh",
+    "file": "src/app.js",
+    "from": "(this.cube.due !== undefined && this.cube.due > mono)",
+    "to": "false"
+  },
+  {
+    "name": "the button does not read a miss again",
+    "file": "src/app.js",
+    "from": "            this.misses.delete(key);\n",
+    "to": ""
+  },
+  {
+    "name": "a read again that finds nothing drops the tariff",
+    "file": "src/app.js",
+    "from": "      if (known) {\n",
+    "to": "      if (false) {\n"
+  },
+  {
+    "name": "the status not cleared at the end of a pause",
+    "file": "src/app.js",
+    "from": "      this.publishStatus().catch(() => {});\n    }, ms + 1);",
+    "to": "    }, ms + 1);"
+  },
+  {
+    "name": "two reads of /data at once",
+    "file": "src/app.js",
+    "from": "      if (this.storeReading) {",
+    "to": "      if (false) {"
+  },
+  {
+    "name": "LINDAS read while /data is unreadable",
+    "file": "src/app.js",
+    "from": "if (this.storeState === 'ok' && this.contracts.size > 0) {",
+    "to": "if (this.contracts.size > 0) {"
+  },
+  {
+    "name": "a negative kWh fails the period",
+    "file": "src/tariffs.js",
+    "from": "const used = Math.max(0, kwh);",
+    "to": "const used = kwh;"
+  },
+  {
+    "name": "stop() leaves the request in flight",
+    "file": "src/app.js",
+    "from": "    this.abort.abort();\n",
+    "to": ""
+  },
+  {
+    "name": "an aborted request pauses everything",
+    "file": "src/app.js",
+    "from": "if (this.closed) throw new Unavailable('stopped');\n      this.startPause(err);",
+    "to": "this.startPause(err);"
+  },
+  {
+    "name": "orphaned contracts kept (refresh)",
+    "file": "src/app.js",
+    "from": ".filter((c) => c && c.template_key === TEMPLATE_KEY && c.status !== 'orphaned')\n        .slice(0, 50)",
+    "to": ".filter((c) => c && c.template_key === TEMPLATE_KEY)\n        .slice(0, 50)"
+  },
+  {
+    "name": "review R2 Zurich year at UTC+2",
+    "file": "src/tariffs.js",
+    "from": "return new Date(ms + 60 * 60 * 1000).getUTCFullYear();",
+    "to": "return new Date(ms + 2 * 60 * 60 * 1000).getUTCFullYear();"
+  },
+  {
+    "name": "review R3 VAT 2024 boundary off by one",
+    "file": "src/constants.js",
+    "from": "if (year >= 2024) return 0.081;",
+    "to": "if (year > 2024) return 0.081;"
+  },
+  {
+    "name": "review R4 VAT 2018 boundary off by one",
+    "file": "src/constants.js",
+    "from": "if (year >= 2018) return 0.077;",
+    "to": "if (year > 2018) return 0.077;"
+  },
+  {
+    "name": "review R5 VAT added when excluded",
+    "file": "src/tariffs.js",
+    "from": "const vat = vatMode === 'included' ?",
+    "to": "const vat = vatMode !== 'nope' ?"
+  },
+  {
+    "name": "review R6 search text allows a double quote",
+    "file": "src/lindas.js",
+    "from": "if (!/^[\\p{L}\\p{M}0-9 .'’()/-]+$/u.test(text)) return null;",
+    "to": "if (!/^[\\p{L}\\p{M}0-9 .'’()/\"-]+$/u.test(text)) return null;"
+  },
+  {
+    "name": "review R7 searchQuery does not re-check the text",
+    "file": "src/lindas.js",
+    "from": "typeof search?.name === 'string' && searchText(search.name)?.name === search.name",
+    "to": "typeof search?.name === 'string'"
+  },
+  {
+    "name": "review R8 tariffQuery does not check integers",
+    "file": "src/lindas.js",
+    "from": "if (!isInt(municipality, 1, 99999) || !isInt(year, 1900, 9999)) {",
+    "to": "if (false) {"
+  },
+  {
+    "name": "review R9 redirects followed",
+    "file": "src/lindas.js",
+    "from": "redirect: 'error',",
+    "to": "redirect: 'follow',"
+  },
+  {
+    "name": "review R11 year after next allowed",
+    "file": "src/app.js",
+    "from": "if (year < FIRST_YEAR || year > today.year + 1) return { code: 'out_of_range' };",
+    "to": "if (year < FIRST_YEAR || year > today.year + 2) return { code: 'out_of_range' };"
+  },
+  {
+    "name": "review R12 current price valid until the wrong New Year",
+    "file": "src/app.js",
+    "from": "const validUntil = new Date(yearStart(year + 1)).toISOString();",
+    "to": "const validUntil = new Date(yearStart(year + 1) + 3600000).toISOString();"
+  },
+  {
+    "name": "review R13 current price budget 30 s",
+    "file": "src/constants.js",
+    "from": "export const CURRENT_BUDGET = 3 * SECOND;",
+    "to": "export const CURRENT_BUDGET = 30 * SECOND;"
+  },
+  {
+    "name": "review R14 empty decimal read as 0",
+    "file": "src/tariffs.js",
+    "from": "!/^-?\\d{1,6}(\\.\\d{1,9})?$/.test(text.trim())",
+    "to": "!/^-?\\d{0,6}(\\.\\d{0,9})?$/.test(text.trim())"
+  },
+  {
+    "name": "review R15 September boundary off by one",
+    "file": "src/app.js",
+    "from": "if (year === today.year + 1 && today.month < NEXT_YEAR_FROM_MONTH) return { code: 'not_yet' };",
+    "to": "if (year === today.year + 1 && today.month <= NEXT_YEAR_FROM_MONTH) return { code: 'not_yet' };"
+  },
+  {
+    "name": "review R16 control characters kept in source texts",
+    "file": "src/tariffs.js",
+    "from": "const clean = text.replace(/[\\u0000-\\u001f\\u007f-\\u009f]/g, ' ').trim();",
+    "to": "const clean = text.trim();"
+  },
+  {
+    "name": "review R17 select timer never cleared",
+    "file": "src/lindas.js",
+    "from": "    timers.clearTimeout(id);\n    signal?.",
+    "to": "    signal?."
+  },
+  {
+    "name": "review R18 /data load not bounded in time",
+    "file": "src/app.js",
+    "from": "const result = await Promise.race([read, late]);",
+    "to": "const result = await read;"
+  },
+  {
+    "name": "review R21 Retry-After read from the local clock",
+    "file": "src/lindas.js",
+    "from": "const now = Date.parse(dateHeader ?? '');",
+    "to": "const now = Date.now();"
+  },
+  {
+    "name": "review R22 rounding not put into energy",
+    "file": "src/tariffs.js",
+    "from": "parts.energy += excl - known.reduce((s, k) => s + parts[k], 0);",
+    "to": ""
+  },
+  {
+    "name": "review R23 template key not checked",
+    "file": "src/app.js",
+    "from": "if (contract?.template_key !== undefined && contract.template_key !== TEMPLATE_KEY) {",
+    "to": "if (false) {"
   }
 ]

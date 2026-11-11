@@ -55,6 +55,11 @@ export function reasonText(reason, { municipality, year }) {
         `ElCom has no ${year} tariff for municipality ${municipality}; asked again after ${when(reason.until)}`,
         `ElCom n'a pas de tarif ${year} pour la commune ${municipality} ; redemandé après le ${when(reason.until)}`,
       );
+    case 'unreadable':
+      return both(
+        `the ElCom answer for municipality ${municipality} in ${year} could not be read; asked again after ${when(reason.until)}`,
+        `la réponse ElCom pour la commune ${municipality} en ${year} est illisible ; redemandée après le ${when(reason.until)}`,
+      );
     case 'paused':
       return both(
         `the ElCom data (LINDAS) did not answer; next try after ${when(reason.until)}`,
@@ -88,8 +93,8 @@ export function problemText(pick, inputs, year) {
       );
     case 'category_missing':
       return both(
-        `no ${inputs.category} tariff in municipality ${inputs.municipality} in ${year}`,
-        `pas de tarif ${inputs.category} dans la commune ${inputs.municipality} en ${year}`,
+        `ElCom publishes no ${inputs.category} tariff for municipality ${inputs.municipality} in ${year}: choose another profile`,
+        `l'ElCom ne publie pas de tarif ${inputs.category} pour la commune ${inputs.municipality} en ${year} : choisissez un autre profil`,
       );
     default:
       return both(
@@ -130,6 +135,14 @@ export const TEXTS = {
     'Type 2 to 60 letters of a municipality name, or a 4-digit postal code.',
     "Tapez de 2 à 60 lettres d'un nom de commune, ou un numéro postal (ex. 1003).",
   ),
+  storeBroken: both(
+    'The /data volume of the integration cannot be read: ElCom is only asked for the prices Gladys needs until it is readable again.',
+    "Le volume /data de l'intégration est illisible : l'ElCom n'est interrogée que pour les prix demandés par Gladys jusqu'à ce qu'il redevienne lisible.",
+  ),
+  searchLate: both(
+    'The search took too long; try again in a minute.',
+    'La recherche a pris trop de temps ; réessayez dans une minute.',
+  ),
   noMatch: both('No Swiss municipality matches.', 'Aucune commune suisse ne correspond.'),
   match: (m, year) =>
     m.operators.length
@@ -138,8 +151,8 @@ export const TEXTS = {
           `${m.name} : numéro de commune ${m.id} ; gestionnaires ${year} : ${operatorList(m.operators)}`,
         )
       : both(
-          `${m.name}: municipality number ${m.id}; no ElCom tariff in ${year}`,
-          `${m.name} : numéro de commune ${m.id} ; pas de tarif ElCom en ${year}`,
+          `${m.name}: municipality number ${m.id}; no ElCom tariff in ${year} (merged into another municipality? search its postal code)`,
+          `${m.name} : numéro de commune ${m.id} ; pas de tarif ElCom en ${year} (fusionnée ? cherchez son numéro postal)`,
         ),
 };
 

@@ -1,0 +1,787 @@
+{
+  "head": {
+    "vars": [
+      "operator",
+      "operatorName",
+      "category",
+      "product",
+      "total",
+      "energy",
+      "gridusage",
+      "charge",
+      "aidfee",
+      "meteringrate",
+      "energyname",
+      "modified"
+    ]
+  },
+  "results": {
+    "bindings": [
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/675"
+        },
+        "operatorName": { "type": "literal", "value": "Services Industriels de Lausanne" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/C7"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "21.567"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "9.098"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "5.235"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "4.924"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.010"
+        },
+        "energyname": { "type": "literal", "value": "Puissance" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/675"
+        },
+        "operatorName": { "type": "literal", "value": "Services Industriels de Lausanne" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H1"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "34.393"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "9.437"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "12.107"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "4.924"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "5.625"
+        },
+        "energyname": { "type": "literal", "value": "Duo" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/675"
+        },
+        "operatorName": { "type": "literal", "value": "Services Industriels de Lausanne" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/C2"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "30.171"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "9.787"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "12.860"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "4.924"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.300"
+        },
+        "energyname": { "type": "literal", "value": "Duo" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/675"
+        },
+        "operatorName": { "type": "literal", "value": "Services Industriels de Lausanne" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/C6"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "energyname": { "type": "literal", "value": "Aucun" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/675"
+        },
+        "operatorName": { "type": "literal", "value": "Services Industriels de Lausanne" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H6"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "26.198"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "8.506"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "10.108"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "4.924"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.360"
+        },
+        "energyname": { "type": "literal", "value": "Duo" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/675"
+        },
+        "operatorName": { "type": "literal", "value": "Services Industriels de Lausanne" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H7"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "28.178"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "9.031"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "11.231"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "4.924"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.692"
+        },
+        "energyname": { "type": "literal", "value": "Duo" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/675"
+        },
+        "operatorName": { "type": "literal", "value": "Services Industriels de Lausanne" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/C3"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "29.395"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "10.007"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "11.948"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "4.924"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.216"
+        },
+        "energyname": { "type": "literal", "value": "Puissance" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/675"
+        },
+        "operatorName": { "type": "literal", "value": "Services Industriels de Lausanne" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/C4"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "27.987"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "9.596"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "11.102"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "4.924"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.065"
+        },
+        "energyname": { "type": "literal", "value": "Puissance" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/675"
+        },
+        "operatorName": { "type": "literal", "value": "Services Industriels de Lausanne" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/C5"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.000"
+        },
+        "energyname": { "type": "literal", "value": "Aucun" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/675"
+        },
+        "operatorName": { "type": "literal", "value": "Services Industriels de Lausanne" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H8"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "29.704"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "9.354"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "11.926"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "4.924"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "1.200"
+        },
+        "energyname": { "type": "literal", "value": "Duo" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/675"
+        },
+        "operatorName": { "type": "literal", "value": "Services Industriels de Lausanne" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H2"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "32.218"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "9.390"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "12.004"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "4.924"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "3.600"
+        },
+        "energyname": { "type": "literal", "value": "Duo" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/675"
+        },
+        "operatorName": { "type": "literal", "value": "Services Industriels de Lausanne" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H4"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "30.503"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "9.353"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "11.926"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "4.924"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.000"
+        },
+        "energyname": { "type": "literal", "value": "Duo" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/675"
+        },
+        "operatorName": { "type": "literal", "value": "Services Industriels de Lausanne" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/C1"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "31.043"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "9.802"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "12.892"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "4.924"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "1.125"
+        },
+        "energyname": { "type": "literal", "value": "Duo" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/675"
+        },
+        "operatorName": { "type": "literal", "value": "Services Industriels de Lausanne" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H3"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "29.118"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "8.914"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "10.980"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "4.924"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.000"
+        },
+        "energyname": { "type": "literal", "value": "Duo" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/675"
+        },
+        "operatorName": { "type": "literal", "value": "Services Industriels de Lausanne" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H5"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "28.437"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "8.952"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "11.061"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "4.924"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "1.200"
+        },
+        "energyname": { "type": "literal", "value": "Duo" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      }
+    ]
+  }
+}

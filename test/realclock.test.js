@@ -1,7 +1,7 @@
 // -----------------------------------------------------------------------------
 // The app on a REAL moving clock (performance.now, setTimeout) and a real local
 // HTTP server playing LINDAS: the contracts are read at 0, a day and two days,
-// the tariff of the year is asked once and only once, the timers never pile
+// the tariff of the year is asked once and the date of the data once a day, the timers never pile
 // up and none is left after stop. Time sped up: a day lasts about 0.4 s.
 // Everything is stopped in t.after, so a failure never leaves a timer alive.
 // -----------------------------------------------------------------------------
@@ -97,7 +97,8 @@ test('real clock: contracts read every day, the tariff asked once, timers bounde
     assert.ok(gap >= 0.9 * DAY, `never sooner than a day: ${at} h`);
     assert.ok(gap < 1.5 * DAY, `on time: ${at} h`);
   }
-  assert.deepEqual(asked, [true], 'the tariff of the year asked once');
+  assert.equal(asked.filter(Boolean).length, 1, 'the tariff of the year asked once');
+  assert.equal(asked.filter((x) => !x).length, 3, 'the date of the ElCom data asked once a day');
   assert.ok(peakLive <= 4, `${peakLive} timers alive at once`);
   assert.equal(live.size, 0, `${live.size} timers left after stop`);
   assert.ok(timersSet <= 20, `${timersSet} timers set`);

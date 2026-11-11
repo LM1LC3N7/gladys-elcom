@@ -15,7 +15,14 @@ For each municipality, grid operator, year and consumption profile, ElCom publis
 a kWh** (Rp./kWh, without VAT) for a standard product and for the cheapest product of the operator. It publishes
 **no peak / off-peak (HT/NT) split and no time windows**: a double tariff shows only as its average over the
 profile. The integration therefore prices every kWh of a calendar year (Europe/Zurich time) at that average. The
-yearly fees (metering, basic fees) are already spread on the kWh by ElCom; nothing is added on top.
+yearly fees (metering, basic fees) are already spread by ElCom on the yearly volume of the profile (Bern, H4 2026:
+metering 93.60 CHF / 4,500 kWh = 2.08 Rp./kWh); nothing is added on top. A home far from the volume of its profile
+is therefore priced less accurately: choose the profile closest to your yearly consumption.
+
+The `cheapest` product is published since 2018 only, and by a part of the operators (about a third of the rows in
+2026; none in Lausanne): when it is missing, the contract says so and asks for `standard`. ElCom writes a price of
+0 ("Aucun", "kein Tarif vorhanden") when an operator has no tariff for a profile: the integration takes it as "no
+tariff" and says so, never as a price of 0.
 
 The consumption profiles (ElCom categories):
 
@@ -50,19 +57,26 @@ a product the operator does not have, a municipality ElCom has no tariff for).
 
 ## How often the data is read
 
-ElCom publishes the tariffs once a year (the next year in early September). The integration keeps what it read in
-its `/data` volume and:
+ElCom publishes the tariffs once a year (the next year in early September) and corrects them now and then. The
+integration keeps what it read in its `/data` volume and:
 
-- reads the tariffs of a municipality for a year **once** and keeps them (40 municipality-years at most, the least
+- reads the tariffs of a municipality for a year once and keeps them (40 municipality-years at most, the least
   recently used dropped first);
 - asks for the next year from 1 September only;
-- when ElCom has no tariff for a municipality and a year, asks again a week later at the soonest;
+- asks once a day the date ElCom last changed its data: when it is newer than a tariff of this year or the next in
+  use, that tariff is read again (once per change);
+- reads again, once a week at most, a tariff of this year or the next in which a contract finds nothing (an
+  operator, a profile or a product not published yet);
+- when ElCom has no tariff for a municipality and a year, or its answer cannot be read, asks again a week later at
+  the soonest;
+- the **Check my contracts** button reads again the tariffs of the contracts (this year, and the next from
+  September) read more than an hour ago, a missing one included;
 - sends one request at a time, two seconds apart at least, with its own User-Agent;
-- after a failure (no answer, timeout, rate limit, server error, unreadable answer), pauses every request for
-  1 minute, doubled at each new failure up to 6 hours (a `Retry-After` from the server is honoured, within 6 hours);
-- keeps these dates across a restart.
+- after a failure (no answer, timeout, rate limit, server error), pauses every request for 1 minute, doubled at
+  each new failure up to 6 hours (a `Retry-After` from the server is honoured, within 6 hours);
+- keeps these dates across a restart; while `/data` cannot be read, it only asks for the prices Gladys needs.
 
-A correction ElCom makes after the integration read a year is therefore not picked up.
+Half hours Gladys already priced are not priced again after a correction: only the next ones use it.
 
 ## Pricing and Gladys
 

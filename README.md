@@ -11,8 +11,10 @@ energy contract.
 - User documentation: [English](docs/en.md), [français](docs/fr.md).
 - ElCom publishes yearly averages per consumption profile, without peak / off-peak split: every kWh of a calendar
   year (Europe/Zurich) is priced at that average.
-- Each (municipality, year) is read once and kept in `/data`; the next year is asked from 1 September; a missing
-  tariff is asked again a week later at the soonest; any failure pauses the requests (1 min doubled up to 6 h).
+- Each (municipality, year) is read once and kept in `/data`, read again when ElCom changes its data (date of the
+  cube, asked daily) or weekly when a contract finds nothing in it; the next year is asked from 1 September; a
+  missing tariff is asked again a week later at the soonest; any failure pauses the requests (1 min doubled up to
+  6 h).
 
 ## Development
 

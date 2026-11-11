@@ -91,7 +91,7 @@ test('from 1 September the next year is fetched too, before it never (current pr
   assert.equal(now.next_price, null);
   assert.equal(now.valid_until, '2026-12-31T23:00:00.000Z');
   assert.equal(w.lindas.count('351:2027'), 0);
-  await w.advance(DAY);
+  await w.advance(DAY + MINUTE);
   assert.equal(w.lindas.count('351:2027'), 1, 'asked in September');
   const next = await run(w, w.app.energyCurrent({ contract: contract({ municipality: 351 }) }));
   assert.ok(Math.abs(next.next_price - 0.31 * 1.081) < 1e-12);
@@ -139,7 +139,7 @@ test('a miss dated in the future in /data (clock set back) waits a week from now
   await run(w, w.app.start());
   assert.equal(w.lindas.count('351:2026'), 0);
   assert.ok(
-    store.data.misses['351:2026'] <= JUNE + w.fake.clock.now,
+    store.data.misses['351:2026'].at <= JUNE + w.fake.clock.now,
     'kept as asked now, not in the future',
   );
   await w.advance(7 * DAY + MINUTE);
@@ -219,14 +219,25 @@ test('the pause is kept in /data: a restart does not ask sooner; a pause from th
   await w3.app.stop();
 });
 
-test('rows none of which is readable: a pause (the format changed), never "no tariff"', async () => {
+test('rows none of which is readable: this municipality waits a week (never "no tariff", never a 0), the others go on', async () => {
   const w = await setup({
-    tariffs: { '351:2026': [{ operator: { type: 'literal', value: '?' } }] },
+    tariffs: {
+      '351:2026': [{ operator: { type: 'literal', value: '?' } }],
+      '352:2026': operatorRows(),
+    },
   });
   await run(w, w.app.start());
-  assert.equal(w.app.misses.size, 0);
-  assert.ok(w.app.pause);
-  assert.equal(w.gladys.fake.connectionStatus.connected, false);
+  assert.equal(w.app.misses.get('351:2026').kind, 'unreadable');
+  assert.equal(w.app.pause, null, 'no pause for every municipality');
+  assert.equal(w.gladys.fake.connectionStatus.connected, true);
+  assert.match(
+    w.gladys.fake.connectionStatus.message.en,
+    /answer for municipality 351 in 2026 could not be read/,
+  );
+  await rejects(w, price(w, { municipality: 351 }), /could not be read/);
+  const other = await run(w, price(w, { municipality: 352 }));
+  assert.equal(other.length, 4);
+  assert.equal(w.lindas.count('351:2026'), 1);
   await w.app.stop();
 });
 
@@ -613,5 +624,196 @@ test('the button "Check my contracts": every contract, its price or its problem'
   };
   const down = await run(w, w.app.checkContracts());
   assert.match(down.en, /could not be read/);
+  await w.app.stop();
+});
+
+test('review r1 I1: a "no tariff" row (total 0) is a failure for the core, never a cost of 0', async () => {
+  const lausanne = JSON.parse(
+    (await import('node:fs')).readFileSync(
+      new URL('./fixtures/lausanne-5586-2026.json', import.meta.url),
+    ),
+  );
+  const w = await setup({ tariffs: { '5586:2026': lausanne.results.bindings }, contracts: [] });
+  await run(w, w.app.start());
+  const ack = await run(
+    w,
+    w.gladys.fake.energyPrice({
+      contract: contract({ municipality: 5586, category: 'C5' }),
+      billing_period: {},
+      cumulative_before: {},
+      intervals: intervals('2026-06-01T00:00:00Z', 4, 30),
+    }),
+  );
+  assert.equal(ack.success, false);
+  assert.match(String(ack.error), /publishes no C5 tariff for municipality 5586 in 2026/);
+  const h4 = await run(w, price(w, { municipality: 5586, category: 'H4' }));
+  assert.ok(h4.every((c) => c.cost > 0));
+  // A municipality whose every row is 0: no tariff (asked again in a week), not unreadable.
+  w.lindas.tariffs['7:2026'] = [binding({ total: '0.000', energyname: 'Aucun' })];
+  await rejects(w, price(w, { municipality: 7 }), /ElCom has no 2026 tariff for municipality 7/);
+  assert.equal(w.app.misses.get('7:2026').kind, 'missing');
+  await w.app.stop();
+});
+
+test('review r1 I2: an operator published later is read again within a week; the cube date reads again a changed year', async () => {
+  const start = Date.parse('2026-09-01T06:00:00Z');
+  const tariffs = {
+    '4324:2026': operatorRows({ operator: 5 }),
+    '4324:2027': operatorRows({ operator: 5 }),
+  };
+  const w = await setup({
+    start,
+    tariffs,
+    contracts: [contract({ municipality: 4324, operator: 87 })],
+  });
+  await run(w, w.app.start());
+  assert.equal(w.lindas.count('4324:2027'), 1);
+  assert.match(
+    w.gladys.fake.connectionStatus.message.en,
+    /operator 87 does not serve municipality 4324 in 2027/,
+  );
+  // Operator 87 published a few days later.
+  w.lindas.tariffs['4324:2027'] = [
+    ...operatorRows({ operator: 5 }),
+    ...operatorRows({ operator: 87, operatorName: 'Baldingen' }),
+  ];
+  w.lindas.tariffs['4324:2026'] = w.lindas.tariffs['4324:2027'];
+  await w.advance(6 * DAY);
+  assert.equal(w.lindas.count('4324:2027'), 1, 'not before a week');
+  await w.advance(2 * DAY);
+  assert.equal(w.lindas.count('4324:2027'), 2, 'read again after a week');
+  assert.match(
+    w.gladys.fake.connectionStatus.message.en,
+    /municipality 4324, Baldingen, H4 standard 2026/,
+  );
+  assert.match(
+    w.gladys.fake.connectionStatus.message.en,
+    /Baldingen, H4 standard 2027/,
+    'the next year described from September',
+  );
+  await w.advance(30 * DAY);
+  assert.equal(
+    w.lindas.count('4324:2027'),
+    2,
+    'no problem left: never read again while the data is unchanged',
+  );
+  // ElCom changes its data: the years in use are read again once.
+  w.lindas.cubeModified = '2026-12-01';
+  await w.advance(DAY + MINUTE);
+  assert.equal(w.lindas.count('4324:2027'), 3);
+  assert.equal(w.lindas.count('4324:2026'), 3);
+  await w.advance(3 * DAY);
+  assert.equal(w.lindas.count('4324:2027'), 3, 'once per change of the data');
+  assert.ok(w.lindas.cubes.length <= 45, `${w.lindas.cubes.length} cube questions in 44 days`);
+  await w.app.stop();
+});
+
+test('review r1 I2: the button reads again what was read (or missing) more than an hour ago', async () => {
+  const w = await setup({
+    contracts: [contract({ municipality: 351 }), contract({ municipality: 9999 }, 2)],
+  });
+  await run(w, w.app.start());
+  assert.equal(w.lindas.count('351:2026'), 1);
+  assert.equal(w.lindas.count('9999:2026'), 1);
+  await run(w, w.app.checkContracts());
+  assert.equal(w.lindas.count('351:2026'), 1, 'not within the hour');
+  await w.advance(HOUR + MINUTE);
+  w.lindas.tariffs['9999:2026'] = operatorRows({ operator: 9 });
+  const text = await run(w, w.app.checkContracts());
+  assert.equal(w.lindas.count('351:2026'), 2);
+  assert.equal(w.lindas.count('9999:2026'), 2);
+  assert.match(text.en, /Contract 2: municipality 9999/);
+  await w.app.stop();
+});
+
+test('review r1 M1: the status follows the end of a pause without waiting for the daily refresh', async () => {
+  const w = await setup();
+  await run(w, w.app.start());
+  w.lindas.answer = () => new Response('', { status: 503 });
+  await rejects(w, price(w, { municipality: 352 }), /did not answer/);
+  assert.equal(w.gladys.fake.connectionStatus.connected, false, 'said when it starts');
+  w.lindas.answer = undefined;
+  await w.advance(MINUTE + SECOND);
+  assert.equal(w.gladys.fake.connectionStatus.connected, true, 'cleared when it ends');
+  await w.app.stop();
+  assert.equal(w.fake.pending.size, 0);
+});
+
+test('review r1 M3/M4: a slow /data is read once at a time; an unreadable one: nothing read but the prices', async () => {
+  const store = createMemoryStore({ entries: [] });
+  store.gate = new Promise(() => {});
+  const w = await setup({ store });
+  w.app.start();
+  await w.advance(45 * SECOND);
+  assert.equal(store.loads, 1, 'never two reads at once');
+  await w.app.stop();
+  const broken = createMemoryStore({ entries: [] });
+  broken.failLoad = 1000;
+  const b = await setup({ store: broken });
+  await run(b, b.app.start());
+  assert.equal(b.lindas.requests.length + b.lindas.cubes.length, 0, 'the refresh reads nothing');
+  assert.match(
+    b.gladys.fake.connectionStatus.message.en,
+    /\/data volume of the integration cannot be read/,
+  );
+  await rejects(b, b.app.findMunicipality({ query: 'Bern' }), /cannot be read/);
+  const costs = await run(b, price(b, { municipality: 351 }));
+  assert.equal(costs.length, 4, 'the prices the core asks for still go');
+  await b.app.stop();
+});
+
+test('review r1 M7: stop() aborts the request in flight, without a pause', async () => {
+  const w = await setup({ contracts: [], requestTimeout: 120 * SECOND });
+  await run(w, w.app.start());
+  let aborted = false;
+  w.lindas.answer = (r) => {
+    r.init.signal.addEventListener('abort', () => (aborted = true));
+    return 'hang';
+  };
+  const pending = price(w, { municipality: 351 }).catch((e) => e);
+  await w.settle();
+  assert.equal(w.lindas.inFlight, 1);
+  await w.app.stop();
+  await w.settle();
+  assert.equal(aborted, true);
+  assert.equal(w.lindas.inFlight, 0);
+  assert.equal(w.app.pause, null);
+  assert.match((await pending).message, /stopping|still being fetched/);
+});
+
+test('review r1 M9/M10: an orphaned contract is ignored; an input error is said in French too', async () => {
+  const w = await setup({
+    contracts: [
+      { ...contract({ municipality: 777 }, 1), status: 'orphaned' },
+      contract({ municipality: 'abc' }, 2),
+    ],
+  });
+  await run(w, w.app.start());
+  assert.equal(w.lindas.count('777:2026'), 0);
+  const { message } = w.gladys.fake.connectionStatus;
+  assert.doesNotMatch(message.en, /777/);
+  assert.match(message.fr, /numéro de commune \(OFS\) doit être un nombre entier/);
+  await w.app.stop();
+});
+
+test('review r1: the cube date is asked once a day even across reconnections; a read again that finds nothing keeps the tariff', async () => {
+  const w = await setup();
+  await run(w, w.app.start());
+  assert.equal(w.lindas.cubes.length, 1);
+  w.app.disconnected();
+  await run(w, w.app.start());
+  await run(w, w.app.start());
+  assert.equal(w.lindas.cubes.length, 1, 'not again within the day');
+  // The button an hour later: LINDAS answers nothing; the tariff read before is kept.
+  await w.advance(HOUR + MINUTE);
+  w.lindas.tariffs['351:2026'] = [];
+  await run(w, w.app.checkContracts());
+  assert.equal(w.lindas.count('351:2026'), 2);
+  assert.equal(w.app.misses.has('351:2026'), false, 'a tariff kept is never a miss');
+  const costs = await run(w, price(w, { municipality: 351 }));
+  assert.ok(costs.every((c) => c.cost > 0));
+  await w.advance(10 * MINUTE);
+  await run(w, w.app.checkContracts());
+  assert.equal(w.lindas.count('351:2026'), 2, 'not again within the hour');
   await w.app.stop();
 });

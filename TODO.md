@@ -17,12 +17,27 @@
 - 2026-11-11: components sent to the core: energy, grid, charges, aid_fee, metering, vat when the published parts add
   up to the total (within 0.011 Rp., the rounding goes into energy); `tariff` + `vat` otherwise. No `fixed`
   component: ElCom spreads the yearly fees on the kWh.
-- 2026-11-11: a missing `cheapest` product (Lausanne publishes none) is an error naming `standard`, never a silent
-  fallback.
-- 2026-11-11: reading rules: a (municipality, year) once, ever; the next year from 1 September; a miss again after
-  7 days; one request at a time, 2 s apart; any failure pauses everything from 1 min doubled to 6 h (Retry-After
-  honoured, capped); all kept in `/data` (unreadable `/data` never written over, read again every 10 s). Corrections
-  ElCom makes after a read are not picked up (documented).
+- 2026-11-11: a missing `cheapest` product (Lausanne publishes none; `cheapest` exists since 2018 for about a
+  third of the rows) is an error naming `standard`, never a silent fallback. **Question for Louis**: take
+  `standard` when the operator publishes a single product?
+- 2026-11-11: reading rules: a (municipality, year) read once and kept; the next year from 1 September; a miss
+  again after 7 days; one request at a time, 2 s apart; any failure pauses everything from 1 min doubled to 6 h
+  (Retry-After honoured, capped); all kept in `/data` (unreadable `/data` never written over, read again every
+  10 s, one read at a time).
+- 2026-11-12 (review r1 I2): **revalidation.** The `schema:dateModified` of the cube asked once a day (only with
+  contracts): a tariff of this year or the next older than it is read again (once per change, a day apart at
+  least). A tariff in which a contract finds nothing (operator, profile, product) read again once a week. The
+  button "Check my contracts" reads again what was read, or missing, more than an hour ago. A read again that
+  finds nothing keeps what was read. Half hours already priced are not repriced (no core path for a delegated
+  contract: `requestEnergyRecalculation` only covers calendars).
+- 2026-11-12 (review r1 I1): a total of 0 or less is ElCom's "no tariff" ("Aucun", "kein Tarif vorhanden"):
+  dropped, the contract gets "no tariff for this profile/product", never a price of 0. Totals above 925 Rp.
+  refused (10 CHF/kWh of the core once the VAT is added).
+- 2026-11-12 (review r1 M6): an answer none of whose rows is readable waits a week for that municipality and
+  year only, never a pause of every request.
+- 2026-11-12 (review r1 M4): while `/data` is unreadable, only the pricing the core asks for reads LINDAS (no
+  daily refresh, no button, no search).
+- 2026-11-12 (review r1 M5): a half hour of 0 kWh or less costs 0 (never a failure of the whole period).
 - 2026-11-11: `gladys_version` `>=5.2.0`, not `>=5.1.0`: the store validator asks 5.2.0 for `energy_contracts`
   (`MANIFEST_FIELD_MIN_GLADYS_VERSION`), as gladys-octopus-energy.
 - 2026-11-11: type `provider` (no device), categories `energy` only; no `keywords` nor `countries` in the manifest
@@ -35,5 +50,5 @@
 
 - Watch a real Gladys contract priced end to end (catch-up of a billing period over New Year).
 - When ElCom publishes HT/NT prices or windows, a template with time windows.
-- A refresh of a year read before 1 January, once, to pick up the last corrections of the operators.
+- Reprice the half hours already priced after a correction, if the core gets a path for delegated contracts.
 - Follow municipality mergers (the old number for the years before).

@@ -249,13 +249,62 @@ test('costs: one per interval, the price of its year, the clock changes priced, 
     /No ElCom tariff for 2024/,
   );
   assert.throws(() => intervalCosts([{ starts_at: 'nope', kwh: 1 }], prices), /Invalid interval/);
-  assert.throws(
-    () => intervalCosts([{ starts_at: '2026-01-05T00:00:00Z', kwh: -1 }], prices),
-    /Invalid/,
+  const reset = intervalCosts([{ starts_at: '2026-01-05T00:00:00Z', kwh: -1 }], prices)[0];
+  assert.equal(reset.cost, 0);
+  assert.ok(
+    Object.values(reset.components).every((v) => v === 0),
+    'no negative component',
   );
   assert.throws(
     () => intervalCosts([{ starts_at: '2026-01-05T00:00:00Z', kwh: NaN }], prices),
     /Invalid/,
   );
   assert.equal(intervalCosts([{ starts_at: '2026-01-05T00:00:00Z', kwh: 0 }], prices)[0].cost, 0);
+});
+
+test('a total of 0 is "no tariff", never a price: the real Lausanne C5/C6 2026 and a whole operator in 2021', () => {
+  const read = (f) => JSON.parse(readFileSync(new URL(`./fixtures/${f}`, import.meta.url)));
+  const lausanne = parseTariffRows(read('lausanne-5586-2026.json').results.bindings, 5586, 2026);
+  assert.equal(lausanne.empty, 2);
+  assert.equal(lausanne.bad, 0);
+  assert.ok(!lausanne.rows.some((r) => r.total <= 0));
+  assert.equal(
+    pickRow(lausanne, parseInputs({ municipality: 5586, category: 'C5' })).problem,
+    'category_missing',
+  );
+  assert.equal(
+    pickRow(lausanne, parseInputs({ municipality: 5586, category: 'C6' })).problem,
+    'category_missing',
+  );
+  assert.ok(pickRow(lausanne, parseInputs({ municipality: 5586, category: 'H4' })).row.total > 0);
+  // 2021, commune 4229: the standard product of every profile but one is "KEIN NAME", 0.
+  const old = parseTariffRows(read('commune-4229-2021.json').results.bindings, 4229, 2021);
+  assert.ok(old.empty >= 14);
+  const h4 = pickRow(old, parseInputs({ municipality: 4229, category: 'H4' }));
+  assert.ok(h4.problem, 'no price of 0 for H4 standard');
+  assert.ok(
+    old.operators.some((o) => o.id === 95),
+    'the operator without tariff is still listed',
+  );
+  // Every row at 0: no tariff at all (not an unreadable answer).
+  const none = parseTariffRows(
+    [binding({ total: '0.000' }), binding({ category: 'H1', total: '0' })],
+    1,
+    2026,
+  );
+  assert.deepEqual([none.rows.length, none.empty, none.bad], [0, 2, 0]);
+  // The bound of the core, VAT included: 925 Rp. at most.
+  assert.equal(parseTariffRows([binding({ total: 925 })], 1, 2026).rows.length, 1);
+  assert.equal(parseTariffRows([binding({ total: 925.5 })], 1, 2026).rows.length, 0);
+});
+
+test('an input refused is said in English and French', () => {
+  try {
+    parseInputs({ municipality: 'x' });
+    assert.fail('no throw');
+  } catch (err) {
+    assert.ok(err instanceof InputError);
+    assert.match(err.texts.en, /municipality number \(BFS\) must be a whole number/);
+    assert.match(err.texts.fr, /numéro de commune \(OFS\) doit être un nombre entier/);
+  }
 });

@@ -53,7 +53,8 @@ scripts/                          cover.png generator, mutation check of the gua
 
 ## Rules of this integration
 
-- Never ask LINDAS more often than the source changes: a (municipality, year) once, the next year from
+- Never ask LINDAS more often than the source changes: a (municipality, year) once, read again only when the
+  cube date (asked daily) is newer, weekly when a contract finds nothing, hourly by the button; the next year from
   1 September, a miss after 7 days, one request at a time 2 s apart, any failure pauses everything (1 min doubled
   to 6 h). Every path goes through `ElcomApp.ensure()` / `request()`: never call `select()` elsewhere.
 - Never a zero cost for an unknown price: throw, the core retries.

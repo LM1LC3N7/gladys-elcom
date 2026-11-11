@@ -80,6 +80,20 @@ export const PAUSE_MAX = 6 * HOUR;
 /** No tariff for a municipality and a year: asked again a week later at the soonest. */
 export const MISS_RETRY = 7 * DAY;
 
+/** A tariff already read is read again one day later at the soonest, whatever the reason. */
+export const REREAD_MIN = DAY;
+/**
+ * A tariff of this year or the next is read again when ElCom changed its
+ * data after it was read (the date of the cube, asked once a day), and, once
+ * a week at most, when a contract finds no tariff in it (an operator, a
+ * profile or a product missing: a partial publication). The button "Check
+ * my contracts" reads them again, once an hour at most.
+ */
+// 23 h, not 24: the daily refresh never finds it a moment too early and skips a day.
+export const CUBE_CHECK = 23 * HOUR;
+export const PROBLEM_REREAD = 7 * DAY;
+export const BUTTON_REREAD = HOUR;
+
 /** The contracts are read again, and the tariffs they need fetched, once a day. */
 export const REFRESH_INTERVAL = DAY;
 /** Reading the contracts failed: tried again from 1 min, doubled up to 1 h. */

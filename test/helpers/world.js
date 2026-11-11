@@ -111,6 +111,9 @@ export function createLindas(tariffs = {}) {
     peak: 0,
     answer: undefined,
     search: [],
+    /** The date of the cube (`schema:dateModified`), and the requests asking it. */
+    cubeModified: '2026-11-10',
+    cubes: [],
   };
   lindas.fetch = async (url, init) => {
     const query = new URLSearchParams(init.body).get('query');
@@ -119,10 +122,14 @@ export function createLindas(tariffs = {}) {
       url,
       init,
       query,
-      key: tariff ? `${tariff[1]}:${tariff[2]}` : 'search',
+      key: tariff
+        ? `${tariff[1]}:${tariff[2]}`
+        : /SELECT \?modified WHERE/.test(query)
+          ? 'cube'
+          : 'search',
       at: lindas.clock?.now,
     };
-    lindas.requests.push(request);
+    (request.key === 'cube' ? lindas.cubes : lindas.requests).push(request);
     lindas.inFlight += 1;
     lindas.peak = Math.max(lindas.peak, lindas.inFlight);
     try {
@@ -136,7 +143,16 @@ export function createLindas(tariffs = {}) {
       if (answer instanceof Response) return answer;
       if (answer instanceof Error) throw answer;
       const bindings =
-        request.key === 'search' ? lindas.search : (lindas.tariffs[request.key] ?? []);
+        request.key === 'cube'
+          ? [{ modified: { type: 'literal', value: lindas.cubeModified } }]
+          : request.key === 'search'
+            ? lindas.search
+            : // A tariff row carries the date of the cube, as in LINDAS.
+              (lindas.tariffs[request.key] ?? []).map((b) =>
+                b?.modified
+                  ? { ...b, modified: { type: 'literal', value: lindas.cubeModified } }
+                  : b,
+              );
       return new Response(JSON.stringify(results(bindings)), {
         status: 200,
         headers: { 'content-type': 'application/sparql-results+json' },

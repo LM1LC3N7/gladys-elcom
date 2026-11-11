@@ -39,8 +39,10 @@ test('a request: POST form, our User-Agent, SPARQL JSON asked, no redirect follo
     seen = { url, init };
     return ok(results([binding()]));
   };
-  const rows = await select(tariffQuery(351, 2026), { version: '0.1.0', fetchImpl });
+  const { timers, pending } = createFakeClock(0);
+  const rows = await select(tariffQuery(351, 2026), { version: '0.1.0', fetchImpl, timers });
   assert.equal(rows.length, 1);
+  assert.equal(pending.size, 0, 'the timeout cleared once answered');
   assert.equal(seen.url, 'https://lindas.admin.ch/query');
   assert.equal(seen.init.method, 'POST');
   assert.equal(seen.init.redirect, 'error');

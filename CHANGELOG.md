@@ -10,6 +10,8 @@ the notes of the version's GitHub Release.
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-11-11
+
 ### Added
 
 - First version: a delegated energy contract template "Swiss municipality tariff (ElCom)" pricing every half hour
@@ -24,3 +26,6 @@ the notes of the version's GitHub Release.
   year or the next read again when it changed, or once a week when a contract finds nothing in it; the button
   "Check my contracts" reads them again (once an hour at most).
 - A price of 0 in the ElCom data ("Aucun", "kein Tarif vorhanden") is "no tariff", never a cost of 0.
+
+[Unreleased]: https://github.com/LM1LC3N7/gladys-elcom/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/LM1LC3N7/gladys-elcom/releases/tag/v0.1.1

@@ -1,6 +1,6 @@
 {
   "name": "gladys-elcom",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "Gladys Assistant external integration pricing an energy contract at the electricity tariff ElCom publishes for each Swiss municipality (LINDAS open data). Unofficial, not affiliated with ElCom.",
   "type": "module",

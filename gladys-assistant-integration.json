@@ -1,177 +1,187 @@
 {
   "manifest_version": 1,
-  "type": "device",
-  "name": "Demo Devices Template",
+  "type": "provider",
+  "name": "ElCom electricity tariffs",
   "description": {
-    "en": "Starter template showing sensors, a switch, a dimmable light and a smart plug.",
-    "fr": "Template de démarrage : capteurs, interrupteur, lampe variable et prise connectée."
+    "en": "Electricity tariff of every Swiss municipality (ElCom open data) for your energy contract.",
+    "fr": "Tarif d'électricité de chaque commune suisse (données ouvertes ElCom) pour votre contrat."
   },
-  "version": "1.0.0",
-  "docker_image": "ghcr.io/gladysassistant/integration-template-js:1.0.0",
-  "gladys_version": ">=5.1.0",
-  "cover_image": "https://raw.githubusercontent.com/GladysAssistant/integration-template-js/master/cover.png",
-  "categories": ["lighting", "security", "environment"],
-  "transports": ["local", "cloud"],
+  "version": "0.1.0",
+  "docker_image": "ghcr.io/lm1lc3n7/gladys-elcom:0.1.0",
+  "gladys_version": ">=5.2.0",
+  "cover_image": "https://raw.githubusercontent.com/LM1LC3N7/gladys-elcom/main/cover.png",
+  "categories": ["energy"],
+  "transports": ["cloud"],
   "config_schema": [
     {
       "key": "intro",
       "type": "section",
-      "label": { "en": "Getting started", "fr": "Pour commencer" },
+      "label": {
+        "en": "Getting started",
+        "fr": "Pour commencer"
+      },
       "description": {
-        "en": "The demo weather station reads real data from the free Open-Meteo API: pick the coordinates to observe. No account, no API key.",
-        "fr": "La station météo de démonstration lit de vraies données via l'API gratuite Open-Meteo : choisissez les coordonnées à observer. Pas de compte, pas de clé d'API."
+        "en": "Nothing to set here. Create an energy contract in Gladys with the \"Swiss municipality tariff (ElCom)\" template and type your municipality number (BFS); the \"Find my municipality\" button below gives it, with the grid operators. The integration prices every kWh at the yearly average tariff ElCom publishes for your municipality and consumption profile (no peak / off-peak split: ElCom publishes none). Open data, no account, no key. Unofficial, not affiliated with ElCom. Checked against the live ElCom data, never tested inside a real Gladys energy contract.",
+        "fr": "Rien à régler ici. Créez un contrat d'énergie dans Gladys avec le modèle « Tarif de la commune suisse (ElCom) » et tapez le numéro de votre commune (OFS) ; le bouton « Trouver ma commune » ci-dessous le donne, avec les gestionnaires de réseau. L'intégration tarifie chaque kWh au tarif moyen annuel publié par l'ElCom pour votre commune et votre profil de consommation (pas de distinction heures pleines / creuses : l'ElCom n'en publie pas). Données ouvertes, sans compte ni clé. Non officielle, sans lien avec l'ElCom. Vérifiée sur les vraies données ElCom, jamais testée dans un vrai contrat d'énergie Gladys."
       },
       "links": [
         {
-          "url": "https://open-meteo.com/en/docs",
-          "label": { "en": "Open-Meteo documentation", "fr": "Documentation Open-Meteo" }
+          "url": "https://www.strompreis.elcom.admin.ch/",
+          "label": {
+            "en": "ElCom electricity tariffs",
+            "fr": "Tarifs d'électricité ElCom"
+          }
+        },
+        {
+          "url": "https://github.com/LM1LC3N7/gladys-elcom",
+          "label": {
+            "en": "Source code",
+            "fr": "Code source"
+          }
         }
       ]
-    },
-    {
-      "key": "latitude",
-      "type": "number",
-      "label": { "en": "Latitude", "fr": "Latitude" },
-      "description": {
-        "en": "Latitude used for the demo weather sensor.",
-        "fr": "Latitude utilisée par le capteur météo de démonstration."
-      },
-      "placeholder": { "en": "e.g. 48.8566", "fr": "ex. 48.8566" },
-      "required": true,
-      "default": 48.8566,
-      "min": -90,
-      "max": 90
-    },
-    {
-      "key": "longitude",
-      "type": "number",
-      "label": { "en": "Longitude", "fr": "Longitude" },
-      "description": {
-        "en": "Longitude used for the demo weather sensor.",
-        "fr": "Longitude utilisée par le capteur météo de démonstration."
-      },
-      "placeholder": { "en": "e.g. 2.3522", "fr": "ex. 2.3522" },
-      "required": true,
-      "default": 2.3522,
-      "min": -180,
-      "max": 180
-    },
-    {
-      "key": "unit",
-      "type": "select",
-      "label": { "en": "Temperature unit", "fr": "Unité de température" },
-      "required": false,
-      "default": "celsius",
-      "options": [
-        { "value": "celsius", "label": { "en": "Celsius", "fr": "Celsius" } },
-        { "value": "fahrenheit", "label": { "en": "Fahrenheit", "fr": "Fahrenheit" } }
-      ]
-    },
-    {
-      "key": "poll_frequency",
-      "type": "number",
-      "label": { "en": "Refresh interval (s)", "fr": "Intervalle de rafraîchissement (s)" },
-      "description": {
-        "en": "How often sensors are polled, in seconds (one minute minimum).",
-        "fr": "Fréquence d'interrogation des capteurs, en secondes (une minute minimum)."
-      },
-      "required": false,
-      "default": 300,
-      "min": 60,
-      "max": 3600
     }
   ],
   "actions": [
     {
-      "key": "test_weather",
-      "label": { "en": "Test the weather provider", "fr": "Tester le fournisseur météo" },
-      "timeout_seconds": 30
+      "key": "find_municipality",
+      "label": {
+        "en": "Find my municipality",
+        "fr": "Trouver ma commune"
+      },
+      "timeout_seconds": 30,
+      "fields": [
+        {
+          "key": "query",
+          "type": "string",
+          "required": true,
+          "label": {
+            "en": "Municipality name or postal code",
+            "fr": "Nom de la commune ou numéro postal"
+          },
+          "placeholder": {
+            "en": "e.g. Bern or 3011",
+            "fr": "ex. Lausanne ou 1003"
+          }
+        }
+      ]
     },
     {
-      "key": "identify",
-      "label": { "en": "Identify a device", "fr": "Identifier un appareil" },
-      "fields": [
-        {
-          "key": "device",
-          "type": "select",
-          "source": "devices",
-          "label": { "en": "Device", "fr": "Appareil" },
-          "required": true
-        }
-      ]
+      "key": "check_contracts",
+      "label": {
+        "en": "Check my contracts",
+        "fr": "Vérifier mes contrats"
+      },
+      "timeout_seconds": 30
     }
   ],
-  "scene_triggers": [
-    {
-      "key": "motion_detected",
-      "label": { "en": "Motion detected", "fr": "Mouvement détecté" },
-      "description": {
-        "en": "A demo motion sensor saw a person or an animal move.",
-        "fr": "Un détecteur de démonstration a vu bouger une personne ou un animal."
-      },
-      "fields": [
-        {
-          "key": "device",
-          "type": "select",
-          "source": "devices",
-          "label": { "en": "Sensor", "fr": "Détecteur" }
+  "energy_contracts": {
+    "templates": [
+      {
+        "key": "elcom-municipality",
+        "name": {
+          "en": "Swiss municipality tariff (ElCom)",
+          "fr": "Tarif de la commune suisse (ElCom)"
         },
-        {
-          "key": "target",
-          "type": "multi_select",
-          "label": { "en": "What moved", "fr": "Ce qui a bougé" },
-          "options": [
-            { "value": "person", "label": { "en": "Person", "fr": "Personne" } },
-            { "value": "animal", "label": { "en": "Animal", "fr": "Animal" } }
-          ]
-        }
-      ],
-      "variables": [
-        {
-          "key": "target",
-          "type": "string",
-          "label": { "en": "What moved", "fr": "Ce qui a bougé" }
-        }
-      ]
-    }
-  ],
-  "scene_actions": [
-    {
-      "key": "identify_device",
-      "label": { "en": "Identify a device", "fr": "Identifier un appareil" },
-      "description": {
-        "en": "Make a device signal itself (the demo light blinks).",
-        "fr": "Fait se signaler un appareil (la lampe de démonstration clignote)."
-      },
-      "timeout_seconds": 15,
-      "fields": [
-        {
-          "key": "device",
-          "type": "select",
-          "source": "devices",
-          "label": { "en": "Device", "fr": "Appareil" },
-          "required": true
-        }
-      ],
-      "outputs": [
-        {
-          "key": "signalled",
-          "type": "boolean",
-          "label": { "en": "Device signalled", "fr": "Appareil signalé" }
-        }
-      ]
-    }
-  ],
-  "widgets": [
-    {
-      "key": "demo_status",
-      "label": { "en": "Demo status", "fr": "État de la démo" },
-      "description": {
-        "en": "Live temperature and plug power, plug connection and observed location.",
-        "fr": "Température et puissance en direct, connexion de la prise, position observée."
-      },
-      "icon": "activity",
-      "action_timeout_seconds": 15
-    }
-  ]
+        "description": {
+          "en": "The yearly average tariff ElCom publishes for your municipality, grid operator and consumption profile: energy, grid, municipal charges, federal surcharge and metering, each kWh of a calendar year at the same price.",
+          "fr": "Le tarif moyen annuel publié par l'ElCom pour votre commune, votre gestionnaire et votre profil : énergie, réseau, taxes communales, supplément fédéral et comptage, chaque kWh d'une année au même prix."
+        },
+        "country": "CH",
+        "currency": "CHF",
+        "timezone": "Europe/Zurich",
+        "pricing_mode": "delegated",
+        "version": "1",
+        "inputs": [
+          {
+            "key": "municipality",
+            "type": "number",
+            "required": true,
+            "label": {
+              "en": "Municipality number (BFS)",
+              "fr": "Numéro de commune (OFS)"
+            },
+            "description": {
+              "en": "Given by the \"Find my municipality\" button of the integration (e.g. 351 for Bern).",
+              "fr": "Donné par le bouton « Trouver ma commune » de l'intégration (ex. 5586 pour Lausanne)."
+            }
+          },
+          {
+            "key": "operator",
+            "type": "number",
+            "required": false,
+            "label": {
+              "en": "Grid operator number",
+              "fr": "Numéro du gestionnaire de réseau"
+            },
+            "description": {
+              "en": "Only when several operators serve the municipality (the button lists them); empty otherwise.",
+              "fr": "Seulement si plusieurs gestionnaires desservent la commune (le bouton les liste) ; vide sinon."
+            }
+          },
+          {
+            "key": "category",
+            "type": "select",
+            "options": [
+              "H1",
+              "H2",
+              "H3",
+              "H4",
+              "H5",
+              "H6",
+              "H7",
+              "H8",
+              "C1",
+              "C2",
+              "C3",
+              "C4",
+              "C5",
+              "C6",
+              "C7"
+            ],
+            "default": "H4",
+            "required": true,
+            "label": {
+              "en": "Consumption profile",
+              "fr": "Profil de consommation"
+            },
+            "description": {
+              "en": "H1-H8 households (H4: 5-room flat, 4,500 kWh; H7: house with heat pump), C1-C7 businesses. See the documentation.",
+              "fr": "H1-H8 ménages (H4 : 5 pièces, 4 500 kWh ; H7 : maison avec pompe à chaleur), C1-C7 entreprises. Voir la documentation."
+            }
+          },
+          {
+            "key": "product",
+            "type": "select",
+            "options": ["standard", "cheapest"],
+            "default": "standard",
+            "required": true,
+            "label": {
+              "en": "Product",
+              "fr": "Produit"
+            },
+            "description": {
+              "en": "standard: the default product of the operator; cheapest: its cheapest one.",
+              "fr": "standard : le produit par défaut du gestionnaire ; cheapest : son produit le moins cher."
+            }
+          },
+          {
+            "key": "vat",
+            "type": "select",
+            "options": ["included", "excluded"],
+            "default": "included",
+            "required": true,
+            "label": {
+              "en": "VAT",
+              "fr": "TVA"
+            },
+            "description": {
+              "en": "ElCom publishes tariffs without VAT; included adds the Swiss standard rate of the year (8.1 % since 2024).",
+              "fr": "L'ElCom publie les tarifs hors TVA ; included ajoute le taux normal suisse de l'année (8,1 % depuis 2024)."
+            }
+          }
+        ]
+      }
+    ]
+  }
 }

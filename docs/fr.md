@@ -1,67 +1,90 @@
-# Template de démonstration
+# Tarifs d'électricité suisses ElCom
 
-Ceci est la documentation utilisateur de l'intégration. Gladys ré-héberge ce
-fichier et affiche un lien **Documentation** permanent vers lui dans l'écran
-de configuration (dans la langue de l'utilisateur, avec l'anglais en repli) —
-c'est au moment de configurer que l'utilisateur en a le plus besoin. Gardez
-les courtes indications d'accueil dans les blocs `section` du `config_schema`
-du manifest ; mettez ici le pas-à-pas détaillé (captures d'écran, dépannage…).
+Tarifie votre consommation d'électricité dans Gladys au tarif que la Commission fédérale de l'électricité (ElCom)
+publie pour votre commune suisse : énergie, utilisation du réseau, taxes communales, supplément fédéral sur le
+réseau et comptage, en CHF, avec ou sans TVA. Les données sont les données ouvertes de l'ElCom servies par LINDAS,
+le service de données liées de l'administration fédérale : sans compte ni clé.
 
-## Ce que vous obtenez
+Intégration non officielle, sans lien avec l'ElCom ni avec l'administration fédérale. Vérifiée sur les vraies
+données ElCom (Berne, Lausanne, une commune à cinq gestionnaires de réseau), jamais testée dans un vrai contrat
+d'énergie Gladys.
 
-Six appareils de démonstration apparaissent après l'installation : une
-station météo (vraies données Open-Meteo), un interrupteur, une lampe
-variable, une prise connectée avec mesure de puissance, un détecteur de
-mouvement et une caméra.
+## Ce que l'ElCom publie, et ce qu'elle ne publie pas
 
-## Configuration
+Pour chaque commune, gestionnaire de réseau, année et profil de consommation, l'ElCom publie le **prix moyen annuel
+d'un kWh** (ct./kWh, hors TVA) pour un produit standard et pour le produit le moins cher du gestionnaire. Elle ne
+publie **ni distinction heures pleines / heures creuses (HT/NT) ni plages horaires** : un double tarif n'apparaît
+que par sa moyenne sur le profil. L'intégration tarifie donc chaque kWh d'une année civile (heure de Zurich) à
+cette moyenne. Les frais annuels (comptage, taxes de base) sont déjà répartis sur le kWh par l'ElCom ; rien n'est
+ajouté.
 
-1. Ouvrez l'onglet **Configuration** de l'intégration.
-2. Renseignez la **latitude** et la **longitude** que la station météo de
-   démonstration doit observer (Paris par défaut), et choisissez votre unité
-   de température. L'**intervalle de rafraîchissement** règle la fréquence
-   de lecture de la station météo et de la puissance de la prise : toutes
-   les 5 minutes par défaut, toutes les minutes au plus.
-3. Enregistrez : les appareils apparaissent dans l'onglet **Découverte**,
-   prêts à être ajoutés.
+Les profils de consommation (catégories ElCom) :
 
-Le réglage **Préférer la connexion locale** pilote la prise de
-démonstration : elle affiche en badge le canal réellement utilisé (local ou
-cloud), avec un point orange quand elle fonctionne en mode dégradé (local
-refusé, bascule cloud).
+| Profil | Consommateur type                                            |
+| ------ | ------------------------------------------------------------ |
+| H1     | Appartement de 2 pièces, 1 600 kWh/an                        |
+| H2     | Appartement de 4 pièces, 2 500 kWh/an                        |
+| H3     | Appartement de 4 pièces avec boiler électrique, 4 500 kWh/an |
+| H4     | Appartement de 5 pièces, 4 500 kWh/an (par défaut)           |
+| H5     | Maison de 5 pièces, 7 500 kWh/an                             |
+| H6     | Maison de 5 pièces avec chauffage électrique, 25 000 kWh/an  |
+| H7     | Maison de 5 pièces avec pompe à chaleur, 13 000 kWh/an       |
+| H8     | Grand logement en PPE hautement électrifié, 7 500 kWh/an     |
+| C1-C7  | Entreprises, de moins de 8 kW à 1 630 kW                     |
 
-## Actions
+## Mise en route
 
-- **Tester le fournisseur météo** — effectue une requête en direct vers
-  Open-Meteo et affiche la température et l'humidité actuelles sous le
-  bouton.
-- **Identifier un appareil** — choisissez un de vos appareils dans la liste
-  et il se signale (la lampe de démonstration « clignote » dans les logs).
+1. Installez l'intégration : rien à régler.
+2. Dans la page de l'intégration, cliquez sur **Trouver ma commune** et tapez son nom (ou son numéro postal,
+   ex. 1003) : le bouton donne son numéro de commune (OFS) et les gestionnaires de réseau qui la desservent cette
+   année.
+3. Dans les réglages d'énergie de Gladys, créez un contrat sur votre compteur électrique avec le modèle **Tarif de
+   la commune suisse (ElCom)** et remplissez :
+   - **Numéro de commune (OFS)**, ex. 5586 pour Lausanne ;
+   - **Numéro du gestionnaire de réseau**, seulement si plusieurs gestionnaires desservent la commune (vide
+     sinon) ;
+   - **Profil de consommation** (H4 par défaut), **Produit** (`standard` ou `cheapest`, le moins cher) et **TVA**
+     (`included` ajoute le taux normal suisse de l'année : 8,1 % depuis 2024, 7,7 % de 2018 à 2023, 8,0 % avant).
+4. Cliquez sur **Vérifier mes contrats** : il affiche le prix de l'année de chaque contrat, ou ce qui manque.
 
-## Scènes
+Le statut de connexion de l'intégration résume les contrats (prix de l'année, date des données ElCom) ou le
+problème à corriger (plusieurs gestionnaires et aucun choisi, un gestionnaire qui ne dessert pas la commune, un
+profil ou un produit absent chez le gestionnaire, une commune sans tarif ElCom).
 
-L'intégration ajoute ses propres cartes à l'éditeur de scènes (Gladys 5.1
-ou plus récent), dans la catégorie **Intégrations** :
+## Fréquence de lecture
 
-- **Mouvement détecté** (déclencheur) — lance la scène quand un détecteur
-  de démonstration voit bouger quelque chose. Choisissez éventuellement le
-  détecteur et ce qui a bougé (personne, animal) ; laissés vides, toute
-  détection correspond. Les actions suivantes peuvent lire ce qui a bougé
-  avec `{{triggerEvent.data.target}}`.
-- **Identifier un appareil** (action) — fait se signaler l'appareil choisi.
-  Elle indique si l'appareil a pu se signaler, pour que les actions
-  suivantes puissent en dépendre.
+L'ElCom publie les tarifs une fois par an (l'année suivante début septembre). L'intégration garde ce qu'elle a lu
+dans son volume `/data` et :
 
-## Tableau de bord
+- lit les tarifs d'une commune pour une année **une fois** et les garde (40 couples commune-année au plus, le
+  moins récemment utilisé retiré d'abord) ;
+- ne demande l'année suivante qu'à partir du 1er septembre ;
+- quand l'ElCom n'a pas de tarif pour une commune et une année, redemande une semaine plus tard au plus tôt ;
+- envoie une requête à la fois, à deux secondes d'écart au moins, avec son propre User-Agent ;
+- après un échec (pas de réponse, délai dépassé, limite de débit, erreur du serveur, réponse illisible), suspend
+  toutes les requêtes 1 minute, doublée à chaque nouvel échec jusqu'à 6 heures (un `Retry-After` du serveur est
+  respecté, dans la limite de 6 heures) ;
+- garde ces dates à travers un redémarrage.
 
-Ajoutez le widget **État de la démo** à un tableau de bord : il affiche en
-direct la température de la station météo et la puissance de la prise du
-bureau, la connexion utilisée par la prise (en orange si dégradée) et la
-position observée. Son bouton **Identifier la lampe** fait se signaler la
-lampe de démonstration.
+Une correction faite par l'ElCom après la lecture d'une année n'est donc pas reprise.
 
-## Dépannage
+## Tarification et Gladys
 
-L'intégration journalise tout ce qu'elle fait : consultez les logs de
-l'intégration depuis l'interface Gladys (ou `docker logs` sur l'hôte) avec
-`LOG_LEVEL=debug` pour le détail complet.
+Le modèle est « délégué » : Gladys envoie les demi-heures d'une période de facturation, l'intégration répond un
+coût par demi-heure (avec ses composantes). Quand le tarif d'une année n'est pas disponible (pas encore publié,
+commune inconnue, LINDAS suspendu), l'intégration répond une erreur : Gladys n'enregistre aucun coût pour ces
+demi-heures (jamais un zéro) et redemande à son passage suivant. Le prix actuel affiché sur le tableau de bord est
+celui de l'année ; dès septembre, le prix au 1er janvier s'affiche aussi une fois lu.
+
+## Limites
+
+- Pas de distinction heures pleines / creuses (voir plus haut) ; un tarif dynamique est tarifé à sa moyenne publiée.
+- Les numéros de commune changent lors des fusions : une année antérieure à la fusion a ses tarifs sous l'ancien
+  numéro. Un contrat qui couvre le changement reçoit une erreur pour les années où le numéro n'existe pas.
+- Un prix supérieur à 10 CHF/kWh dans les données est ignoré (la borne de Gladys).
+
+## Données et crédits
+
+Source : Commission fédérale de l'électricité ElCom, tarifs d'électricité par gestionnaire de réseau et par
+commune, servis par LINDAS (`lindas.admin.ch`), conditions d'utilisation « Open use ». Voir aussi le site officiel
+[strompreis.elcom.admin.ch](https://www.strompreis.elcom.admin.ch/).

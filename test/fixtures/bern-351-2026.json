@@ -1,0 +1,1450 @@
+{
+  "head": {
+    "vars": [
+      "operator",
+      "operatorName",
+      "category",
+      "product",
+      "total",
+      "energy",
+      "gridusage",
+      "charge",
+      "aidfee",
+      "meteringrate",
+      "energyname",
+      "modified"
+    ]
+  },
+  "results": {
+    "bindings": [
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/519"
+        },
+        "operatorName": { "type": "literal", "value": "Energie Wasser Bern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/C6"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "24.773"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.479"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "7.576"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "1.400"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.019"
+        },
+        "energyname": { "type": "literal", "value": "ewb.Natur.STROM Doppeltarif" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/519"
+        },
+        "operatorName": { "type": "literal", "value": "Energie Wasser Bern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/C3"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/cheapest"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "30.758"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.279"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.367"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "1.750"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.062"
+        },
+        "energyname": { "type": "literal", "value": "ewb.Basis.STROM Doppeltarif" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/519"
+        },
+        "operatorName": { "type": "literal", "value": "Energie Wasser Bern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/C7"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/cheapest"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "23.445"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.061"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "6.680"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "1.400"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.004"
+        },
+        "energyname": { "type": "literal", "value": "ewb.Basis.STROM Doppeltarif" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/519"
+        },
+        "operatorName": { "type": "literal", "value": "Energie Wasser Bern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H1"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "37.030"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.200"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.030"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.650"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "5.850"
+        },
+        "energyname": { "type": "literal", "value": "ewb.Natur.STROM Einfachtarif" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/519"
+        },
+        "operatorName": { "type": "literal", "value": "Energie Wasser Bern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H3"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/cheapest"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "33.060"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.000"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.030"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.650"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.080"
+        },
+        "energyname": { "type": "literal", "value": "ewb.Basis.STROM Einfachtarif" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/519"
+        },
+        "operatorName": { "type": "literal", "value": "Energie Wasser Bern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H4"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/cheapest"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "33.060"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.000"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.030"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.650"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.080"
+        },
+        "energyname": { "type": "literal", "value": "ewb.Basis.STROM Einfachtarif" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/519"
+        },
+        "operatorName": { "type": "literal", "value": "Energie Wasser Bern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H8"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/cheapest"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "32.228"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.000"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.030"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.650"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "1.248"
+        },
+        "energyname": { "type": "literal", "value": "ewb.Basis.STROM Einfachtarif" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/519"
+        },
+        "operatorName": { "type": "literal", "value": "Energie Wasser Bern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/C1"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "32.350"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.200"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.030"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.650"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "1.170"
+        },
+        "energyname": { "type": "literal", "value": "ewb.Natur.STROM Einfachtarif" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/519"
+        },
+        "operatorName": { "type": "literal", "value": "Energie Wasser Bern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H8"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "32.428"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.200"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.030"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.650"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "1.248"
+        },
+        "energyname": { "type": "literal", "value": "ewb.Natur.STROM Einfachtarif" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/519"
+        },
+        "operatorName": { "type": "literal", "value": "Energie Wasser Bern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/C4"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/cheapest"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "29.750"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.058"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "12.623"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "1.750"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.019"
+        },
+        "energyname": { "type": "literal", "value": "ewb.Basis.STROM Doppeltarif" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/519"
+        },
+        "operatorName": { "type": "literal", "value": "Energie Wasser Bern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H2"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/cheapest"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "34.724"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.000"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.030"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.650"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "3.744"
+        },
+        "energyname": { "type": "literal", "value": "ewb.Basis.STROM Einfachtarif" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/519"
+        },
+        "operatorName": { "type": "literal", "value": "Energie Wasser Bern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/C7"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "23.645"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.261"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "6.680"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "1.400"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.004"
+        },
+        "energyname": { "type": "literal", "value": "ewb.Natur.STROM Doppeltarif" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/519"
+        },
+        "operatorName": { "type": "literal", "value": "Energie Wasser Bern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H3"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "33.260"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.200"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.030"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.650"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.080"
+        },
+        "energyname": { "type": "literal", "value": "ewb.Natur.STROM Einfachtarif" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/519"
+        },
+        "operatorName": { "type": "literal", "value": "Energie Wasser Bern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/C2"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "31.492"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.200"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.030"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.650"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.312"
+        },
+        "energyname": { "type": "literal", "value": "ewb.Natur.STROM Einfachtarif" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/519"
+        },
+        "operatorName": { "type": "literal", "value": "Energie Wasser Bern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H4"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "33.260"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.200"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.030"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.650"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.080"
+        },
+        "energyname": { "type": "literal", "value": "ewb.Natur.STROM Einfachtarif" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/519"
+        },
+        "operatorName": { "type": "literal", "value": "Energie Wasser Bern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H5"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "32.428"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.200"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.030"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.650"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "1.248"
+        },
+        "energyname": { "type": "literal", "value": "ewb.Natur.STROM Einfachtarif" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/519"
+        },
+        "operatorName": { "type": "literal", "value": "Energie Wasser Bern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H6"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/cheapest"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "31.354"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.000"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.030"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.650"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.374"
+        },
+        "energyname": { "type": "literal", "value": "ewb.Basis.STROM Einfachtarif" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/519"
+        },
+        "operatorName": { "type": "literal", "value": "Energie Wasser Bern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H6"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "31.554"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.200"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.030"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.650"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.374"
+        },
+        "energyname": { "type": "literal", "value": "ewb.Natur.STROM Einfachtarif" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/519"
+        },
+        "operatorName": { "type": "literal", "value": "Energie Wasser Bern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/C1"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/cheapest"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "32.150"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.000"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.030"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.650"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "1.170"
+        },
+        "energyname": { "type": "literal", "value": "ewb.Basis.STROM Einfachtarif" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/519"
+        },
+        "operatorName": { "type": "literal", "value": "Energie Wasser Bern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/C6"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/cheapest"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "24.573"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.279"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "7.576"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "1.400"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.019"
+        },
+        "energyname": { "type": "literal", "value": "ewb.Basis.STROM Doppeltarif" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/519"
+        },
+        "operatorName": { "type": "literal", "value": "Energie Wasser Bern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H1"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/cheapest"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "36.830"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.000"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.030"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.650"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "5.850"
+        },
+        "energyname": { "type": "literal", "value": "ewb.Basis.STROM Einfachtarif" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/519"
+        },
+        "operatorName": { "type": "literal", "value": "Energie Wasser Bern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H7"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "31.900"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.200"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.030"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.650"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.720"
+        },
+        "energyname": { "type": "literal", "value": "ewb.Natur.STROM Einfachtarif" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/519"
+        },
+        "operatorName": { "type": "literal", "value": "Energie Wasser Bern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/C2"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/cheapest"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "31.292"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.000"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.030"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.650"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.312"
+        },
+        "energyname": { "type": "literal", "value": "ewb.Basis.STROM Einfachtarif" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/519"
+        },
+        "operatorName": { "type": "literal", "value": "Energie Wasser Bern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H5"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/cheapest"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "32.228"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.000"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.030"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.650"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "1.248"
+        },
+        "energyname": { "type": "literal", "value": "ewb.Basis.STROM Einfachtarif" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/519"
+        },
+        "operatorName": { "type": "literal", "value": "Energie Wasser Bern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/C4"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "29.951"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.258"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "12.623"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "1.750"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.019"
+        },
+        "energyname": { "type": "literal", "value": "ewb.Natur.STROM Doppeltarif" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/519"
+        },
+        "operatorName": { "type": "literal", "value": "Energie Wasser Bern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H2"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "34.924"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.200"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.030"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.650"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "3.744"
+        },
+        "energyname": { "type": "literal", "value": "ewb.Natur.STROM Einfachtarif" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/519"
+        },
+        "operatorName": { "type": "literal", "value": "Energie Wasser Bern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/H7"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/cheapest"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "31.700"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.000"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.030"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.650"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.720"
+        },
+        "energyname": { "type": "literal", "value": "ewb.Basis.STROM Einfachtarif" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      },
+      {
+        "operator": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/operator/519"
+        },
+        "operatorName": { "type": "literal", "value": "Energie Wasser Bern" },
+        "category": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/category/C3"
+        },
+        "product": {
+          "type": "uri",
+          "value": "https://energy.ld.admin.ch/elcom/electricityprice/product/standard"
+        },
+        "total": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "30.958"
+        },
+        "energy": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.479"
+        },
+        "gridusage": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "13.367"
+        },
+        "charge": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "1.750"
+        },
+        "aidfee": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "2.300"
+        },
+        "meteringrate": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#decimal",
+          "type": "literal",
+          "value": "0.062"
+        },
+        "energyname": { "type": "literal", "value": "ewb.Natur.STROM Doppeltarif" },
+        "modified": {
+          "datatype": "http://www.w3.org/2001/XMLSchema#date",
+          "type": "literal",
+          "value": "2026-11-10"
+        }
+      }
+    ]
+  }
+}

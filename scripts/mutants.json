@@ -1,0 +1,206 @@
+[
+  {
+    "name": "a miss asked again before a week",
+    "file": "src/app.js",
+    "from": "if (miss && miss.due > mono) return",
+    "to": "if (false) return"
+  },
+  {
+    "name": "the next year asked before September",
+    "file": "src/app.js",
+    "from": "if (year === today.year + 1 && today.month < NEXT_YEAR_FROM_MONTH) return",
+    "to": "if (false) return"
+  },
+  {
+    "name": "the pause not honoured",
+    "file": "src/app.js",
+    "from": "      if (paused) throw new Unavailable('paused', paused.until);\n",
+    "to": ""
+  },
+  {
+    "name": "the backoff not doubled",
+    "file": "src/app.js",
+    "from": "PAUSE_MIN * 2 ** (this.failures - 1)",
+    "to": "PAUSE_MIN"
+  },
+  {
+    "name": "the backoff not capped",
+    "file": "src/app.js",
+    "from": "let ms = Math.min(PAUSE_MAX, PAUSE_MIN * 2 ** (this.failures - 1));",
+    "to": "let ms = PAUSE_MIN * 2 ** (this.failures - 1);"
+  },
+  {
+    "name": "Retry-After ignored",
+    "file": "src/app.js",
+    "from": "ms = Math.min(PAUSE_MAX, Math.max(ms, err.retryAfter * 1000));",
+    "to": "ms = ms + 0;"
+  },
+  {
+    "name": "Retry-After not capped",
+    "file": "src/app.js",
+    "from": "ms = Math.min(PAUSE_MAX, Math.max(ms, err.retryAfter * 1000));",
+    "to": "ms = Math.max(ms, err.retryAfter * 1000);"
+  },
+  {
+    "name": "a success does not reset the backoff",
+    "file": "src/app.js",
+    "from": "      this.failures = 0;\n      this.pause = null;\n",
+    "to": "      this.pause = null;\n"
+  },
+  {
+    "name": "the pause not kept in /data",
+    "file": "src/app.js",
+    "from": "? { until: this.pause.until, code: this.pause.code }",
+    "to": "? null"
+  },
+  {
+    "name": "the pause from /data not capped",
+    "file": "src/app.js",
+    "from": "const rest = Math.min(PAUSE_MAX, pause.until - at);",
+    "to": "const rest = pause.until - at;"
+  },
+  {
+    "name": "a miss from the future not brought to now",
+    "file": "src/app.js",
+    "from": "const asked = Math.min(when, at);",
+    "to": "const asked = when;"
+  },
+  {
+    "name": "a miss from /data not restored",
+    "file": "src/app.js",
+    "from": "if (!known || known.at < asked) this.misses.set",
+    "to": "if (false) this.misses.set"
+  },
+  {
+    "name": "a tariff in memory not used",
+    "file": "src/app.js",
+    "from": "    if (hit) {\n      hit.usedAt",
+    "to": "    if (false) {\n      hit.usedAt"
+  },
+  {
+    "name": "requests not two seconds apart",
+    "file": "src/app.js",
+    "from": "if (wait <= 0) {",
+    "to": "if (true) {"
+  },
+  {
+    "name": "several requests at once",
+    "file": "src/app.js",
+    "from": "const job = this.queue.then(() => this.send(query));",
+    "to": "const job = this.send(query);"
+  },
+  {
+    "name": "the same tariff fetched twice at once",
+    "file": "src/app.js",
+    "from": "let job = this.inflight.get(key);",
+    "to": "let job;"
+  },
+  {
+    "name": "unreadable rows taken for no tariff",
+    "file": "src/app.js",
+    "from": "if (bindings.length > 0) {",
+    "to": "if (false) {"
+  },
+  {
+    "name": "an unreadable /data written over",
+    "file": "src/app.js",
+    "from": "if (this.storeState !== 'ok') return Promise.resolve();",
+    "to": "if (false) return Promise.resolve();"
+  },
+  {
+    "name": "asked before /data is read",
+    "file": "src/app.js",
+    "from": "if (this.storeState === 'pending') return { reason: { code: 'timeout' } };",
+    "to": ""
+  },
+  {
+    "name": "a request after stop",
+    "file": "src/app.js",
+    "from": "if (this.closed) throw new Unavailable('stopped');",
+    "to": ""
+  },
+  {
+    "name": "the pricing waits past its budget",
+    "file": "src/app.js",
+    "from": "return this.within(job, left, { reason: { code: 'timeout' } });",
+    "to": "return job;"
+  },
+  {
+    "name": "the contracts retried without backoff",
+    "file": "src/app.js",
+    "from": "CONTRACTS_RETRY_MIN * 2 ** (this.contractsFailures - 1)",
+    "to": "CONTRACTS_RETRY_MIN"
+  },
+  {
+    "name": "the contracts refreshed too often",
+    "file": "src/app.js",
+    "from": "this.scheduleRefresh(generation, REFRESH_INTERVAL);",
+    "to": "this.scheduleRefresh(generation, REFRESH_INTERVAL / 24);"
+  },
+  {
+    "name": "the same search asked again",
+    "file": "src/app.js",
+    "from": "if (cached && mono - cached.at < SEARCH_CACHE) return",
+    "to": "if (false) return"
+  },
+  {
+    "name": "a future fetch date kept",
+    "file": "src/app.js",
+    "from": "const fetched = finite(fetchedAt) ? Math.min(fetchedAt, at) : at;",
+    "to": "const fetched = finite(fetchedAt) ? fetchedAt : at;"
+  },
+  {
+    "name": "a missing price becomes a zero",
+    "file": "src/tariffs.js",
+    "from": "if (!price) throw new Error(`No ElCom tariff for ${year}`);",
+    "to": "if (!price) return { starts_at, cost: 0 };"
+  },
+  {
+    "name": "the year changes at UTC midnight",
+    "file": "src/tariffs.js",
+    "from": "return new Date(ms + 60 * 60 * 1000).getUTCFullYear();",
+    "to": "return new Date(ms).getUTCFullYear();"
+  },
+  {
+    "name": "the VAT of 2024 wrong",
+    "file": "src/constants.js",
+    "from": "if (year >= 2024) return 0.081;",
+    "to": "if (year >= 2025) return 0.081;"
+  },
+  {
+    "name": "several operators: the first taken",
+    "file": "src/tariffs.js",
+    "from": "} else if (operators.length === 1) {",
+    "to": "} else if (operators.length >= 1) {"
+  },
+  {
+    "name": "a missing product falls back silently",
+    "file": "src/tariffs.js",
+    "from": "if (!row) return { problem: 'product_missing', operators };",
+    "to": "if (!row) return { row: ofCategory[0], operator };"
+  },
+  {
+    "name": "components that do not add up kept",
+    "file": "src/tariffs.js",
+    "from": "Math.abs(sum - row.total) <= 0.011",
+    "to": "true"
+  },
+  {
+    "name": "a price above 10 CHF/kWh kept",
+    "file": "src/tariffs.js",
+    "from": "n >= 0 && n <= 1000 ?",
+    "to": "n >= 0 ?"
+  },
+  {
+    "name": "an answer not cut past its size",
+    "file": "src/lindas.js",
+    "from": "    if (size > max) {",
+    "to": "    if (false) {"
+  },
+  {
+    "name": "a request never timed out",
+    "file": "src/lindas.js",
+    "from": "    controller.abort();",
+    "to": ""
+  }
+]

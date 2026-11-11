@@ -11,6 +11,12 @@ Gladys through
 [`@gladysassistant/integration-sdk`](https://github.com/GladysAssistant/integration-sdk-js),
 its only runtime dependency. It started from the official JavaScript template.
 
+It is a `provider` (no device) declaring one **delegated energy contract template**: the core sends the
+30-minute intervals of a contract, the integration prices them at the electricity tariff the Swiss Federal
+Electricity Commission (ElCom) publishes for the municipality, grid operator, consumption profile and product of
+the contract, per Zurich calendar year. The tariffs come from LINDAS (`lindas.admin.ch`, SPARQL, open data without
+key). Unofficial: not affiliated with ElCom.
+
 ## Commands
 
 ```bash
@@ -31,18 +37,29 @@ pushing.
 ## Architecture
 
 ```
-index.js                          SDK wiring only: handlers registered before connect()
-src/devices/index.js              registry of the device blueprints + dispatch helpers
-src/devices/<type>.js             one device type per file (buildDevice, onPoll, onSetValue...)
-src/scenes.js                     scene action handlers (manifest `scene_actions`)
-src/widgets.js                    dashboard widget handlers (manifest `widgets`)
-src/config.js                     DEFAULT_CONFIG (mirrors the manifest defaults) + normalization
-src/weather.js                    example driver (Open-Meteo)
-gladys-assistant-integration.json manifest: name, config_schema, actions, image...
+index.js                          SDK wiring only
+src/handlers.js                   the SDK handlers (energy price, current price, buttons, connection)
+src/app.js                        ElcomApp: cache, reading rules, pauses, /data, pricing, status, buttons
+src/lindas.js                     the SPARQL queries and the one HTTP access (bounded in size and time)
+src/tariffs.js                    rows, inputs, the row of a contract, unit price, interval costs, Zurich year (pure)
+src/store.js                      /data (missing / read / unreadable told apart)
+src/i18n.js                       status and button texts (en/fr)
+src/constants.js                  endpoint, pacing, bounds, manifest keys
+gladys-assistant-integration.json manifest: provider, actions, energy_contracts template
 docs/en.md, docs/fr.md            user documentation, re-hosted by Gladys (mandatory)
-test/                             node --test, against the SDK's fake Gladys (integration-sdk/testing)
-.github/scripts/release.mjs       release helpers (manifest bump, changelog), tested in test/
+test/                             node --test, against the SDK's fake Gladys and a scripted LINDAS
+scripts/                          cover.png generator, mutation check of the guards (mutants.json)
 ```
+
+## Rules of this integration
+
+- Never ask LINDAS more often than the source changes: a (municipality, year) once, the next year from
+  1 September, a miss after 7 days, one request at a time 2 s apart, any failure pauses everything (1 min doubled
+  to 6 h). Every path goes through `ElcomApp.ensure()` / `request()`: never call `select()` elsewhere.
+- Never a zero cost for an unknown price: throw, the core retries.
+- ElCom publishes no peak / off-peak split: never invent one.
+- An unreadable `/data` is never written over.
+- Run `memcap node scripts/mutants.mjs` after touching a guard: no mutant may survive.
 
 ## Rules
 
@@ -67,7 +84,7 @@ test/                             node --test, against the SDK's fake Gladys (in
   catalog `description` holds 10 to 100 characters per language. A field the
   older cores do not know needs a higher `gladys_version` minimum
   (`categories`: 4.86.0; `widgets`, `scene_triggers`, `scene_actions`,
-  `type: "provider"`: 5.1.0). `test/manifest.test.js` ties the manifest to the
+  `type: "provider"`: 5.1.0; `energy_contracts`: 5.2.0). `test/manifest.test.js` ties the manifest to the
   code (defaults, action, scene and widget handlers): change both sides
   together.
 - **User-facing text** is bilingual (English and French): action messages,

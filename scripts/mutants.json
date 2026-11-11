@@ -108,12 +108,6 @@
     "to": ""
   },
   {
-    "name": "a request after stop",
-    "file": "src/app.js",
-    "from": "      if (this.closed) throw new Unavailable('stopped');\n      const mono",
-    "to": "      const mono"
-  },
-  {
     "name": "the pricing waits past its budget",
     "file": "src/app.js",
     "from": "return this.within(job, left, { reason: { code: 'timeout' } });",
@@ -224,7 +218,7 @@
   {
     "name": "a problem never read again",
     "file": "src/app.js",
-    "from": "await this.reread(inputs.municipality, year, PROBLEM_REREAD);",
+    "from": "else if (problem) await this.reread(municipality, year, PROBLEM_REREAD);",
     "to": ""
   },
   {
@@ -406,5 +400,59 @@
     "file": "src/app.js",
     "from": "if (contract?.template_key !== undefined && contract.template_key !== TEMPLATE_KEY) {",
     "to": "if (false) {"
+  },
+  {
+    "name": "review r2 N4 the cube date not restored from /data",
+    "file": "src/app.js",
+    "from": "const cube = data.cube;",
+    "to": "const cube = null;"
+  },
+  {
+    "name": "review r2 N6 the button reads LINDAS while /data is unreadable",
+    "file": "src/app.js",
+    "from": "          if (this.storeState !== 'ok') break;\n",
+    "to": ""
+  },
+  {
+    "name": "review r2 N8 the pause timer survives stop()",
+    "file": "src/app.js",
+    "from": "    if (this.pauseTimer !== undefined) {\n      this.timers.clearTimeout(this.pauseTimer);\n      this.pauseTimer = undefined;\n    }\n    if (this.storeTimer",
+    "to": "    if (this.storeTimer"
+  },
+  {
+    "name": "review r2 N10 an operator with no-tariff rows only not listed",
+    "file": "src/tariffs.js",
+    "from": "        const id = Number(operator);\n        if (!operators.get(id)) operators.set(id, cleanText(b.operatorName, 80));\n      } else {",
+    "to": "      } else {"
+  },
+  {
+    "name": "review R20 a stopped app asks again after the sleep",
+    "file": "src/app.js",
+    "from": "      if (this.closed) throw new Unavailable('stopped');\n      const mono",
+    "to": "      const mono"
+  },
+  {
+    "name": "/data readable again: no refresh nor status",
+    "file": "src/app.js",
+    "from": "if (wasBroken && this.started && !this.closed) {",
+    "to": "if (false) {"
+  },
+  {
+    "name": "status not republished after a fetch",
+    "file": "src/app.js",
+    "from": "    const result = await this.readTariffs(municipality, year);\n    this.publishStatus().catch(() => {});",
+    "to": "    const result = await this.readTariffs(municipality, year);"
+  },
+  {
+    "name": "a tariff not read said being fetched",
+    "file": "src/app.js",
+    "from": "(this.inflight.has(key) ? { code: 'timeout' } : { code: 'unread' })",
+    "to": "{ code: 'timeout' }"
+  },
+  {
+    "name": "only the first contract of a key decides the weekly read again",
+    "file": "src/app.js",
+    "from": "known.problem ||= Boolean(pickRow(entry, inputs).problem);",
+    "to": "if (!keys.has(key)) known.problem = Boolean(pickRow(entry, inputs).problem);"
   }
 ]

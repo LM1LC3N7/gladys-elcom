@@ -817,3 +817,109 @@ test('review r1: the cube date is asked once a day even across reconnections; a 
   assert.equal(w.lindas.count('351:2026'), 2, 'not again within the hour');
   await w.app.stop();
 });
+
+test('review r2 m1: /data readable again republishes the status and does the skipped refresh', async () => {
+  const store = createMemoryStore({ entries: [] });
+  store.failLoad = 1;
+  const w = await setup({ store });
+  await run(w, w.app.start());
+  assert.match(w.gladys.fake.connectionStatus.message.en, /cannot be read/);
+  assert.equal(w.lindas.requests.length, 0);
+  await w.advance(10 * SECOND);
+  await run(w, Promise.resolve(), 5 * SECOND);
+  await w.advance(3 * SECOND);
+  assert.equal(w.app.storeState, 'ok');
+  assert.equal(w.lindas.count('351:2026'), 1, 'the refresh skipped is done');
+  assert.doesNotMatch(w.gladys.fake.connectionStatus.message.en, /cannot be read/);
+  assert.match(w.gladys.fake.connectionStatus.message.en, /35\.95 Rp/);
+  await w.app.stop();
+});
+
+test('review r2 m1: after a pause, the status gives the price read, never "still being fetched"', async () => {
+  const w = await setup();
+  w.lindas.answer = () => new Response('', { status: 503 });
+  await run(w, w.app.start());
+  assert.equal(w.gladys.fake.connectionStatus.connected, false);
+  w.lindas.answer = undefined;
+  await w.advance(MINUTE + SECOND);
+  await run(w, price(w, { municipality: 351 }));
+  await w.settle();
+  const { connected, message } = w.gladys.fake.connectionStatus;
+  assert.equal(connected, true);
+  assert.match(message.en, /35\.95 Rp/);
+  assert.doesNotMatch(message.en, /still being fetched/);
+  // A tariff never asked (no read in flight) is "not read yet", not "being fetched".
+  w.app.contracts.set('9', { id: '9', inputs: { municipality: 400 } });
+  assert.match(w.app.describe(w.app.contracts.get('9'), 2026).en, /not read yet/);
+  await w.app.stop();
+});
+
+test('review r2 m2: the cube date is kept across a restart (N4)', async () => {
+  const store = createMemoryStore();
+  const w = await setup({ store });
+  await run(w, w.app.start());
+  assert.equal(w.lindas.cubes.length, 1);
+  await w.app.stop();
+  assert.equal(store.data.cube.modified, '2026-11-10');
+  const w2 = await setup({ store, start: JUNE + HOUR });
+  await run(w2, w2.app.start());
+  assert.equal(w2.lindas.cubes.length, 0, 'not asked again within the day');
+  await w2.app.stop();
+});
+
+test('review r2 m2: the button reads nothing while /data is unreadable (N6); stop() during a pause leaves no timer (N8)', async () => {
+  const broken = createMemoryStore({ entries: [] });
+  broken.failLoad = 1000;
+  const w = await setup({ store: broken });
+  await run(w, w.app.start());
+  await w.advance(2 * HOUR);
+  const text = await run(w, w.app.checkContracts());
+  assert.match(text.en, /cannot be read/);
+  assert.equal(w.lindas.requests.length + w.lindas.cubes.length, 0);
+  await w.app.stop();
+  const p = await setup({ contracts: [] });
+  await run(p, p.app.start());
+  p.lindas.answer = () => new Response('', { status: 503 });
+  await rejects(p, price(p, { municipality: 351 }), /did not answer/);
+  assert.ok(p.app.pauseTimer !== undefined);
+  await p.app.stop();
+  assert.equal(p.fake.pending.size, 0, 'the pause timer cleared by stop()');
+});
+
+test('review r2 m2: an operator with no-tariff rows only is still listed: "no tariff", not "unknown operator" (N10)', async () => {
+  const tariffs = {
+    '4229:2021': [
+      ...operatorRows({ operator: 229, operatorName: 'Other' }),
+      binding({ operator: 95, operatorName: 'Op 95', total: '0.0', energyname: 'KEIN NAME' }),
+    ],
+  };
+  const w = await setup({ tariffs, contracts: [], start: Date.parse('2021-06-01T08:00:00Z') });
+  await run(w, w.app.start());
+  await rejects(
+    w,
+    price(w, { municipality: 4229, operator: 95 }, '2021-03-01T00:00:00Z'),
+    /publishes no H4 tariff/,
+  );
+  await w.app.stop();
+});
+
+test('review r2 m4: two contracts on one municipality: the one finding nothing still gets its weekly read again', async () => {
+  const start = Date.parse('2026-09-01T06:00:00Z');
+  const tariffs = {
+    '4324:2026': operatorRows({ operator: 5 }),
+    '4324:2027': operatorRows({ operator: 5 }),
+  };
+  const w = await setup({
+    start,
+    tariffs,
+    contracts: [
+      contract({ municipality: 4324, operator: 5 }, 1),
+      contract({ municipality: 4324, operator: 87 }, 2),
+    ],
+  });
+  await run(w, w.app.start());
+  assert.equal(w.lindas.count('4324:2026'), 1);
+  await w.advance(8 * DAY);
+  assert.equal(w.lindas.count('4324:2026'), 2, 'read again for contract 2');
+  await w.app.stop();
+});

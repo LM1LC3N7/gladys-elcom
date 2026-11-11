@@ -37,6 +37,9 @@
   year only, never a pause of every request.
 - 2026-11-12 (review r1 M4): while `/data` is unreadable, only the pricing the core asks for reads LINDAS (no
   daily refresh, no button, no search).
+- 2026-11-12 (review r2): the status is republished after each read of LINDAS and when /data becomes readable
+  again (which also runs the refresh it skipped); a tariff never asked says "not read yet"; the weekly read again
+  of a key is due as soon as one of its contracts finds nothing in it.
 - 2026-11-12 (review r1 M5): a half hour of 0 kWh or less costs 0 (never a failure of the whole period).
 - 2026-11-11: `gladys_version` `>=5.2.0`, not `>=5.1.0`: the store validator asks 5.2.0 for `energy_contracts`
   (`MANIFEST_FIELD_MIN_GLADYS_VERSION`), as gladys-octopus-energy.

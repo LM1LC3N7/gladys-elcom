@@ -70,6 +70,11 @@ export function reasonText(reason, { municipality, year }) {
         `the ${year} tariffs of municipality ${municipality} are still being fetched`,
         `les tarifs ${year} de la commune ${municipality} sont en cours de lecture`,
       );
+    case 'unread':
+      return both(
+        `the ${year} tariffs of municipality ${municipality} are not read yet (asked when Gladys prices it)`,
+        `les tarifs ${year} de la commune ${municipality} ne sont pas encore lus (demandés quand Gladys les tarifie)`,
+      );
     case 'stopped':
       return both('the integration is stopping', "l'intégration s'arrête");
     default:

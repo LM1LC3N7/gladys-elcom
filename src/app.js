@@ -399,9 +399,14 @@ export class ElcomApp {
     if (Number.isInteger(data.failures) && data.failures > this.failures) {
       this.failures = Math.min(data.failures, 20);
     }
+    const wasBroken = this.storeState === 'broken';
     this.storeState = 'ok';
     this.trim();
     this.persist();
+    // /data readable again: the status says so, and what the refresh skipped is done now.
+    if (wasBroken && this.started && !this.closed) {
+      this.refresh(this.generation).catch((err) => this.logger.error('Refresh failed', err));
+    }
   }
 
   /** Bounds the memory (and /data): the least recently used tariffs and the oldest misses go. */
@@ -510,10 +515,8 @@ export class ElcomApp {
     }
     try {
       const bindings = await this.selectImpl(query);
-      const wasPaused = this.pause !== null;
       this.failures = 0;
       this.pause = null;
-      if (wasPaused) this.publishStatus().catch(() => {});
       return bindings;
     } catch (err) {
       // Stopped: the request was aborted on purpose, not a failure of LINDAS.
@@ -583,7 +586,14 @@ export class ElcomApp {
     return this.within(job, left, { reason: { code: 'timeout' } });
   }
 
+  /** Fetch the tariffs of a municipality and year, then republish the status (what it says changed). */
   async fetchTariffs(municipality, year) {
+    const result = await this.readTariffs(municipality, year);
+    this.publishStatus().catch(() => {});
+    return result;
+  }
+
+  async readTariffs(municipality, year) {
     const key = keyOf(municipality, year);
     let bindings;
     try {
@@ -741,7 +751,9 @@ export class ElcomApp {
       } catch (err) {
         this.logger.warn(`ElCom data date not read: ${err?.message ?? err}`);
       }
-      const done = new Set();
+      // By key: whether one of its contracts finds no tariff in it (a partial
+      // publication: read again once a week), whatever the other contracts find.
+      const keys = new Map();
       for (const contract of this.contracts.values()) {
         let inputs;
         try {
@@ -751,24 +763,38 @@ export class ElcomApp {
         }
         for (const year of this.yearsNow()) {
           if (generation !== this.generation || this.closed) return;
+          const key = keyOf(inputs.municipality, year);
           try {
-            const key = keyOf(inputs.municipality, year);
             const { entry } = await this.ensure(inputs.municipality, year);
-            if (!entry || done.has(key)) continue;
-            done.add(key);
-            // Read again when ElCom changed its data, or (once a week) when the
-            // contract finds no tariff in it: a partial publication completed later.
-            if (this.outdated(entry)) {
-              await this.reread(inputs.municipality, year, REREAD_MIN);
-            } else if (pickRow(entry, inputs).problem) {
-              await this.reread(inputs.municipality, year, PROBLEM_REREAD);
-            }
+            if (!entry) continue;
+            const known = keys.get(key) ?? {
+              municipality: inputs.municipality,
+              year,
+              problem: false,
+            };
+            known.problem ||= Boolean(pickRow(entry, inputs).problem);
+            keys.set(key, known);
           } catch (err) {
             // One municipality never stops the others nor the daily refresh.
             this.logger.warn(
               `Tariffs ${year} of municipality ${inputs.municipality} not read: ${err?.message ?? err}`,
             );
           }
+        }
+      }
+      for (const { municipality, year, problem } of keys.values()) {
+        if (generation !== this.generation || this.closed) return;
+        const entry = this.entries.get(keyOf(municipality, year));
+        if (!entry) continue;
+        try {
+          // Read again when ElCom changed its data, or (once a week) when a
+          // contract finds no tariff in it: a partial publication completed later.
+          if (this.outdated(entry)) await this.reread(municipality, year, REREAD_MIN);
+          else if (problem) await this.reread(municipality, year, PROBLEM_REREAD);
+        } catch (err) {
+          this.logger.warn(
+            `Tariffs ${year} of municipality ${municipality} not read again: ${err?.message ?? err}`,
+          );
         }
       }
     }
@@ -788,7 +814,9 @@ export class ElcomApp {
     const key = keyOf(inputs.municipality, year);
     const entry = this.entries.get(key);
     if (!entry) {
-      const reason = this.blocked(inputs.municipality, year) ?? { code: 'timeout' };
+      const reason =
+        this.blocked(inputs.municipality, year) ??
+        (this.inflight.has(key) ? { code: 'timeout' } : { code: 'unread' });
       return reasonText(reason, { municipality: inputs.municipality, year });
     }
     const pick = pickRow(entry, inputs);
